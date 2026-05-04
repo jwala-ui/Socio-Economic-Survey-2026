@@ -259,6 +259,18 @@
       margin-top: 10px;
     }
 
+    .field-error-message {
+      display: none;
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .invalid-card .field-error-message {
+      display: block;
+    }
+
     .invalid-card {
       border-color: var(--danger);
     }
@@ -484,7 +496,7 @@
         </label>
 
         
-        <input id="q1" name="1. Name of the Student" type="text" required placeholder="" />
+        <input id="q1" name="1. Name of the Student" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -515,7 +527,7 @@
         </label>
 
         <div class="note">Note : Registration No means Your Hall Ticket No</div>
-        <input id="q3" name="3. Registration No" type="text" required placeholder="" />
+        <input id="q3" name="3. Registration No" type="text" required inputmode="numeric" maxlength="12" pattern="\d{12}" placeholder="Enter exactly 12 digits" />
 
       </div>
 
@@ -526,7 +538,7 @@
         </label>
 
         
-        <input id="q4" name="4. email id" type="email" required placeholder="" />
+        <input id="q4" name="4. email id" type="email" required placeholder="Example: student@gmail.com" />
 
       </div>
 
@@ -548,7 +560,7 @@
         </label>
 
         <div class="note">Note: Habitat means your village</div>
-        <input id="q6" name="6. Habitat" type="text" required placeholder="" />
+        <input id="q6" name="6. Habitat" type="text" required placeholder="Enter place name only" />
 
       </div>
 
@@ -559,7 +571,7 @@
         </label>
 
         
-        <input id="q7" name="7. Panchayat" type="text" required placeholder="" />
+        <input id="q7" name="7. Panchayat" type="text" required placeholder="Enter panchayat name only" />
 
       </div>
 
@@ -570,7 +582,7 @@
         </label>
 
         
-        <input id="q8" name="8. Post Office" type="text" required placeholder="" />
+        <input id="q8" name="8. Post Office" type="text" required placeholder="Enter post office name only" />
 
       </div>
 
@@ -581,7 +593,7 @@
         </label>
 
         
-        <input id="q9" name="9. Mandal" type="text" required placeholder="" />
+        <input id="q9" name="9. Mandal" type="text" required placeholder="Enter mandal name only" />
 
       </div>
 
@@ -592,7 +604,7 @@
         </label>
 
         
-        <input id="q10" name="10. District" type="text" required placeholder="" />
+        <input id="q10" name="10. District" type="text" required placeholder="Enter district name only" />
 
       </div>
 
@@ -609,7 +621,7 @@
         </label>
 
         
-        <input id="q11" name="11. Name of the Person 1" type="text" required placeholder="" />
+        <input id="q11" name="11. Name of the Person 1" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -639,7 +651,7 @@
         </label>
 
         
-        <input id="q13" name="13. Age" type="number" required placeholder="" />
+        <input id="q13" name="13. Age" type="number" required min="0" max="120" placeholder="0 to 120" />
 
       </div>
 
@@ -717,7 +729,7 @@
         </label>
 
         
-        <input id="q16" name="16. Name of the Person 2" type="text" required placeholder="" />
+        <input id="q16" name="16. Name of the Person 2" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -751,7 +763,7 @@
         </label>
 
         
-        <input id="q18" name="18. Age." type="number" required placeholder="" />
+        <input id="q18" name="18. Age." type="number" required min="0" max="120" placeholder="0 to 120" />
 
       </div>
 
@@ -829,7 +841,7 @@
         </label>
 
         
-        <input id="q21" name="21. Name of the Person 3" type="text" required placeholder="" />
+        <input id="q21" name="21. Name of the Person 3" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -863,7 +875,7 @@
         </label>
 
         
-        <input id="q23" name="23. Age.." type="number" required placeholder="" />
+        <input id="q23" name="23. Age.." type="number" required min="0" max="120" placeholder="0 to 120" />
 
       </div>
 
@@ -941,7 +953,7 @@
         </label>
 
         
-        <input id="q26" name="26. Name of the Person 4" type="text" required placeholder="" />
+        <input id="q26" name="26. Name of the Person 4" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -975,7 +987,7 @@
         </label>
 
         
-        <input id="q28" name="28. Age..." type="number" required placeholder="" />
+        <input id="q28" name="28. Age..." type="number" required min="0" max="120" placeholder="0 to 120" />
 
       </div>
 
@@ -1080,7 +1092,7 @@
         </label>
 
         
-        <input id="q32" name="32. Sub Caste" type="text" required placeholder="" />
+        <input id="q32" name="32. Sub Caste" type="text" required placeholder="Enter text only" />
 
       </div>
 
@@ -1193,7 +1205,7 @@
         </label>
 
         
-        <input id="q38" name="38. Extent of agricultural land (in acres)" type="text" required placeholder="" />
+        <input id="q38" name="38. Extent of agricultural land (in acres)" type="text" required inputmode="decimal" placeholder="Example: 0, 1, 1.5" />
 
       </div>
 
@@ -1239,7 +1251,7 @@
         </label>
 
         
-        <input id="q40" name="40. No of cows" type="number" required placeholder="" />
+        <input id="q40" name="40. No of cows" type="number" required min="0" step="1" placeholder="Enter 0 or more" />
 
       </div>
 
@@ -1250,7 +1262,7 @@
         </label>
 
         
-        <input id="q41" name="41. No of ox" type="number" required placeholder="" />
+        <input id="q41" name="41. No of ox" type="number" required min="0" step="1" placeholder="Enter 0 or more" />
 
       </div>
 
@@ -1261,7 +1273,7 @@
         </label>
 
         
-        <input id="q42" name="42. No of buffaloes" type="number" required placeholder="" />
+        <input id="q42" name="42. No of buffaloes" type="number" required min="0" step="1" placeholder="Enter 0 or more" />
 
       </div>
 
@@ -1272,7 +1284,7 @@
         </label>
 
         
-        <input id="q43" name="43. No of sheeps and goats" type="number" required placeholder="" />
+        <input id="q43" name="43. No of sheeps and goats" type="number" required min="0" step="1" placeholder="Enter 0 or more" />
 
       </div>
 
@@ -1408,7 +1420,7 @@
         </label>
 
         
-        <textarea id="q49" name="49. Diseases in family" required placeholder=""></textarea>
+        <textarea id="q49" name="49. Diseases in family" required placeholder="Enter text only. Numbers are not allowed"></textarea>
 
       </div>
 
@@ -1419,7 +1431,7 @@
         </label>
 
         
-        <input id="q50" name="50. Treatment in which hospital" type="text" required placeholder="" />
+        <input id="q50" name="50. Treatment in which hospital" type="text" required placeholder="Enter hospital name only" />
 
       </div>
 
@@ -1470,7 +1482,7 @@
         </label>
 
         
-        <input id="q53" name="53. Name of the person" type="text" required placeholder="" />
+        <input id="q53" name="53. Name of the person" type="text" required placeholder="Enter alphabets only" />
 
       </div>
 
@@ -1500,7 +1512,7 @@
         </label>
 
         
-        <input id="q55" name="55. Age of ph" type="number" required placeholder="" />
+        <input id="q55" name="55. Age of ph" type="number" required min="0" max="120" placeholder="0 to 120" />
 
       </div>
 
@@ -1511,7 +1523,7 @@
         </label>
 
         
-        <textarea id="q56" name="56. Nature of disability" required placeholder=""></textarea>
+        <textarea id="q56" name="56. Nature of disability" required placeholder="Enter text only. Numbers are not allowed"></textarea>
 
       </div>
 
@@ -1604,7 +1616,7 @@
         </label>
 
         
-        <textarea id="q61" name="61. Channels watched regularly" required placeholder=""></textarea>
+        <textarea id="q61" name="61. Channels watched regularly" required placeholder="Enter text only. Numbers are not allowed"></textarea>
 
       </div>
 
@@ -1636,7 +1648,7 @@
         </label>
 
         
-        <input id="q63" name="63. Mobile No" type="tel" required placeholder="" />
+        <input id="q63" name="63. Mobile No" type="tel" required inputmode="numeric" maxlength="10" pattern="\d{10}" placeholder="Enter 10 digit mobile number" />
 
       </div>
 
@@ -1824,8 +1836,177 @@
       return valid;
     }
 
+    function setCardError(field, message) {
+      const card = field.closest(".question-card");
+      if (!card) return;
+
+      card.classList.add("invalid-card");
+
+      let messageBox = card.querySelector(".field-error-message");
+      if (!messageBox) {
+        messageBox = document.createElement("div");
+        messageBox.className = "field-error-message";
+        card.appendChild(messageBox);
+      }
+
+      messageBox.textContent = message;
+    }
+
+    function clearCardError(field) {
+      const card = field.closest(".question-card");
+      if (!card) return;
+
+      card.classList.remove("invalid-card");
+
+      const messageBox = card.querySelector(".field-error-message");
+      if (messageBox) {
+        messageBox.textContent = "";
+      }
+    }
+
+    function isWholeNumber(value) {
+      return /^\d+$/.test(String(value).trim());
+    }
+
+    function isValidName(value) {
+      return /^[A-Za-z ]{2,}$/.test(String(value).trim());
+    }
+
+    function isValidTextOnly(value) {
+      return /^[A-Za-z .,'()/-]{2,}$/.test(String(value).trim());
+    }
+
+    function containsNumber(value) {
+      return /\d/.test(String(value || ""));
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(value).trim());
+    }
+
+    function isValidAge(value) {
+      if (!isWholeNumber(value)) return false;
+      const age = Number(value);
+      return age >= 0 && age <= 120;
+    }
+
+    function isValidNonNegativeDecimal(value) {
+      return /^\d+(\.\d+)?$/.test(String(value).trim());
+    }
+
+    function validateSpecificField(field) {
+      const id = field.id;
+      const value = String(field.value || "").trim();
+
+      if (["q1", "q11", "q16", "q21", "q26", "q53"].includes(id)) {
+        if (!isValidName(value)) {
+          return "Please enter only alphabets and spaces. Numbers are not allowed.";
+        }
+      }
+
+      if (["q6", "q7", "q8", "q9", "q10", "q32", "q49", "q50", "q56", "q61"].includes(id)) {
+        if (containsNumber(value)) {
+          return "Numbers are not allowed in this text field.";
+        }
+
+        if (!isValidTextOnly(value)) {
+          return "Please enter valid text only.";
+        }
+      }
+
+      if (id === "q4") {
+        if (!isValidEmail(value)) {
+          return "Please enter a valid email ID. Example: student@gmail.com";
+        }
+      }
+
+      if (id === "q3") {
+        if (!/^\d{12}$/.test(value)) {
+          return "Registration No must be exactly 12 digits.";
+        }
+      }
+
+      if (["q13", "q18", "q23", "q28", "q55"].includes(id)) {
+        if (!isValidAge(value)) {
+          return "Please enter a valid age between 0 and 120.";
+        }
+      }
+
+      if (id === "q38") {
+        if (!isValidNonNegativeDecimal(value)) {
+          return "Please enter land extent as a number. Example: 0, 1, 1.5.";
+        }
+      }
+
+      if (["q40", "q41", "q42", "q43"].includes(id)) {
+        if (!isWholeNumber(value)) {
+          return "Please enter a whole number. Use 0 if not applicable.";
+        }
+      }
+
+      if (id === "q63") {
+        if (!/^\d{10}$/.test(value)) {
+          return "Please enter a valid 10 digit mobile number.";
+        }
+      }
+
+      if (id === "q67") {
+        if (field.files && field.files.length > 0) {
+          const file = field.files[0];
+
+          if (!file.type || !file.type.startsWith("image/")) {
+            return "Please upload an image file only.";
+          }
+
+          if (file.size > 1024 * 1024) {
+            return "Please upload an image below 1 MB.";
+          }
+        }
+      }
+
+      return "";
+    }
+
+    function validateProblemDropdowns() {
+      let valid = true;
+      const problemFields = [
+        document.getElementById("q64"),
+        document.getElementById("q65"),
+        document.getElementById("q66")
+      ].filter(Boolean);
+
+      const selectedValues = {};
+
+      problemFields.forEach(field => {
+        const value = String(field.value || "").trim();
+
+        if (!value) {
+          clearCardError(field);
+          return;
+        }
+
+        if (selectedValues[value]) {
+          valid = false;
+          setCardError(field, "Problem 1, Problem 2, and Problem 3 must be different. Please select another problem.");
+          setCardError(selectedValues[value], "Problem 1, Problem 2, and Problem 3 must be different. Please select another problem.");
+        } else {
+          selectedValues[value] = field;
+          const card = field.closest(".question-card");
+          if (card && card.classList.contains("invalid-card")) {
+            const messageBox = card.querySelector(".field-error-message");
+            if (messageBox && messageBox.textContent.includes("must be different")) {
+              clearCardError(field);
+            }
+          }
+        }
+      });
+
+      return valid;
+    }
+
     function validateRequiredStandardFields() {
       let valid = true;
+
       form.querySelectorAll("input[required], select[required], textarea[required]").forEach(field => {
         const card = field.closest(".question-card");
         if (card && card.classList.contains("hidden")) return;
@@ -1833,15 +2014,24 @@
         if (field.type === "checkbox") return;
 
         const emptyFile = field.type === "file" && field.files.length === 0;
-        const emptyText = field.type !== "file" && !field.value.trim();
+        const emptyText = field.type !== "file" && !String(field.value || "").trim();
 
         if (emptyFile || emptyText) {
           valid = false;
-          if (card) card.classList.add("invalid-card");
-        } else if (card) {
-          card.classList.remove("invalid-card");
+          setCardError(field, "This question is required.");
+          return;
+        }
+
+        const specificError = validateSpecificField(field);
+
+        if (specificError) {
+          valid = false;
+          setCardError(field, specificError);
+        } else {
+          clearCardError(field);
         }
       });
+
       return valid;
     }
 
@@ -1942,13 +2132,101 @@
       form.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    const textOnlyFieldIds = ["q1", "q6", "q7", "q8", "q9", "q10", "q11", "q16", "q21", "q26", "q32", "q49", "q50", "q53", "q56", "q61"];
+    const digitOnlyFieldIds = ["q3", "q13", "q18", "q23", "q28", "q40", "q41", "q42", "q43", "q55", "q63"];
+
+    function filterInvalidCharacters(field) {
+      if (!field || !field.id) return;
+
+      const originalValue = field.value;
+      let cleanedValue = originalValue;
+
+      if (textOnlyFieldIds.includes(field.id)) {
+        cleanedValue = originalValue.replace(/[^A-Za-z .,'()/-]/g, "");
+      }
+
+      if (digitOnlyFieldIds.includes(field.id)) {
+        cleanedValue = originalValue.replace(/\D/g, "");
+      }
+
+      if (field.id === "q3") {
+        cleanedValue = cleanedValue.slice(0, 12);
+      }
+
+      if (field.id === "q63") {
+        cleanedValue = cleanedValue.slice(0, 10);
+      }
+
+      if (field.id === "q38") {
+        cleanedValue = originalValue
+          .replace(/[^0-9.]/g, "")
+          .replace(/(\..*)\./g, "$1");
+      }
+
+      if (field.value !== cleanedValue) {
+        field.value = cleanedValue;
+      }
+    }
+
+    form.addEventListener("input", function(event) {
+      const field = event.target;
+      if (!field || !field.id) return;
+
+      filterInvalidCharacters(field);
+
+      const card = field.closest(".question-card");
+      if (!card || card.classList.contains("hidden")) return;
+
+      if (field.required && field.type !== "checkbox") {
+        const valuePresent = field.type === "file"
+          ? field.files.length > 0
+          : String(field.value || "").trim().length > 0;
+
+        if (!valuePresent) {
+          setCardError(field, "This question is required.");
+          return;
+        }
+
+        const specificError = validateSpecificField(field);
+        if (specificError) {
+          setCardError(field, specificError);
+        } else {
+          clearCardError(field);
+        }
+      }
+    });
+
+    form.addEventListener("change", function(event) {
+      const field = event.target;
+      if (!field || !field.id) return;
+
+      filterInvalidCharacters(field);
+
+      const card = field.closest(".question-card");
+      if (!card || card.classList.contains("hidden")) return;
+
+      if (field.required && field.type !== "checkbox") {
+        const specificError = validateSpecificField(field);
+        if (specificError) {
+          setCardError(field, specificError);
+        } else {
+          clearCardError(field);
+        }
+      }
+
+      if (["q64", "q65", "q66"].includes(field.id)) {
+        validateProblemDropdowns();
+      }
+    });
+
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
 
       const validStandard = validateRequiredStandardFields();
       const validCheckboxes = validateRequiredCheckboxGroups();
+      const validProblemDropdowns = validateProblemDropdowns();
 
-      if (!validStandard || !validCheckboxes) {
+      if (!validStandard || !validCheckboxes || !validProblemDropdowns) {
         const firstInvalid = document.querySelector(".invalid-card");
         if (firstInvalid) firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
@@ -2006,6 +2284,7 @@
     form.addEventListener("reset", function() {
       setTimeout(() => {
         document.querySelectorAll(".invalid-card").forEach(card => card.classList.remove("invalid-card"));
+        document.querySelectorAll(".field-error-message").forEach(messageBox => messageBox.textContent = "");
 
         if (keepSuccessMessageAfterReset) {
           keepSuccessMessageAfterReset = false;
