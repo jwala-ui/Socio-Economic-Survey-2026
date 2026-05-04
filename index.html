@@ -283,6 +283,92 @@
       text-align: center;
     }
 
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(32, 33, 36, 0.62);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .success-modal {
+      width: min(92vw, 520px);
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+      border-top: 8px solid var(--purple);
+      animation: modalPop 0.22s ease-out;
+    }
+
+    @keyframes modalPop {
+      from {
+        transform: scale(0.94);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #e6f4ea;
+      color: var(--success);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .success-modal h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .success-modal p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .modal-actions .primary {
+      background: var(--purple);
+      color: white;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -313,6 +399,24 @@
         width: 100%;
       }
 
+      .success-modal {
+        width: 94vw;
+        padding: 24px 16px;
+        border-radius: 16px;
+      }
+
+      .success-modal h2 {
+        font-size: 21px;
+      }
+
+      .success-modal p {
+        font-size: 15px;
+      }
+
+      .modal-actions button {
+        width: 100%;
+      }
+
       .submit-row {
         flex-direction: column-reverse;
         align-items: stretch;
@@ -326,7 +430,8 @@
 
       .toolbar,
       .submit-row,
-      .success {
+      .success,
+      .modal-overlay {
         display: none !important;
       }
 
@@ -359,6 +464,17 @@
     </div>
 
     <div class="success" id="successBox">Response saved successfully in this browser.</div>
+
+    <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+      <div class="success-modal">
+        <div class="success-icon">✓</div>
+        <h2 id="successModalTitle">Survey submitted successfully</h2>
+        <p id="successModalMessage">You are successfully completed socioeconomic survey.</p>
+        <div class="modal-actions">
+          <button type="button" class="primary" onclick="startAnotherSurvey()">Do another survey</button>
+        </div>
+      </div>
+    </div>
 
     <form id="surveyForm" novalidate>
 
@@ -1636,6 +1752,8 @@
 
     const form = document.getElementById("surveyForm");
     const successBox = document.getElementById("successBox");
+    const successModal = document.getElementById("successModal");
+    const successModalMessage = document.getElementById("successModalMessage");
     const recordCount = document.getElementById("recordCount");
 
     let keepSuccessMessageAfterReset = false;
@@ -1816,6 +1934,11 @@
 
     function startAnotherSurvey() {
       successBox.style.display = "none";
+
+      if (successModal) {
+        successModal.classList.remove("show");
+      }
+
       form.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -1851,13 +1974,18 @@
         const personOneName = submissionPackage.data["11. Name of the Person 1"] || "this";
         const safePersonOneName = escapeHTML(personOneName);
 
-        successBox.innerHTML =
-          "<strong>You are successfully completed socioeconomic survey of " +
-          safePersonOneName +
-          " family.</strong>" +
-          "<button type=\"button\" onclick=\"startAnotherSurvey()\">Do another survey</button>";
+        if (successModalMessage) {
+          successModalMessage.innerHTML =
+            "You are successfully completed socioeconomic survey of <strong>" +
+            safePersonOneName +
+            "</strong> family.";
+        }
 
-        successBox.style.display = "block";
+        if (successModal) {
+          successModal.classList.add("show");
+        }
+
+        successBox.style.display = "none";
         window.scrollTo({ top: 0, behavior: "smooth" });
 
         keepSuccessMessageAfterReset = true;
@@ -1928,6 +2056,12 @@
       updateRecordCount();
       successBox.style.display = "none";
     }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && successModal && successModal.classList.contains("show")) {
+        startAnotherSurvey();
+      }
+    });
 
     updateRecordCount();
   </script>
