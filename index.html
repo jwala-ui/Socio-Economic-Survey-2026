@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Socio-Economic Survey 2026 -GDC Cheepurupalli</title>
+  <style>
+    :root {
+      --purple: #673ab7;
+      --purple-dark: #512da8;
+      --bg: #f0ebf8;
+      --card: #ffffff;
+      --border: #dadce0;
+      --text: #202124;
+      --muted: #5f6368;
+      --danger: #d93025;
+      --success: #188038;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px 12px 56px;
+    }
+
+    .form-header {
+      background: var(--card);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      border-top: 12px solid var(--purple);
+      padding: 24px;
+      margin-bottom: 14px;
+    }
+
+    .form-header h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    .form-header p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .required-note {
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .toolbar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .toolbar button,
+    .submit-row button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .primary {
+      background: var(--purple);
+      color: white;
+    }
+
+    .secondary {
+      background: #ede7f6;
+      color: var(--purple-dark);
+    }
+
+    .danger {
+      background: #fce8e6;
+      color: var(--danger);
+    }
+
+    .count {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .success {
+      display: none;
+      background: #e6f4ea;
+      color: var(--success);
+      border: 1px solid #b7dfc2;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .success strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .success button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 600;
+      background: var(--purple);
+      color: white;
+      margin-top: 4px;
+    }
+
+    .section-heading {
+      background: var(--purple);
+      color: white;
+      border-radius: 10px 10px 0 0;
+      padding: 18px 24px;
+      margin-top: 18px;
+      border: 1px solid var(--purple);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .section-heading p {
+      margin: 8px 0 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 12px;
+    }
+
+    .section-heading + .question-card {
+      border-radius: 0 0 10px 10px;
+    }
+
+    .question-title {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .qno {
+      color: var(--muted);
+      margin-right: 4px;
+    }
+
+    .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 4px;
+      font-size: 15px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    select {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      background: white;
+    }
+
+    textarea {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-height: 86px;
+      padding: 10px;
+      background: white;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 1px 0 var(--purple);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .choice input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--purple);
+    }
+
+    .error-text {
+      display: none;
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .invalid-card {
+      border-color: var(--danger);
+    }
+
+    .invalid-card .error-text {
+      display: block;
+    }
+
+    .submit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 10px 2px;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 12px 8px 40px;
+      }
+
+      .form-header,
+      .question-card,
+      .section-heading {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .form-header h1 {
+        font-size: 24px;
+      }
+
+      .count {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .toolbar button,
+      .submit-row button {
+        width: 100%;
+      }
+
+      .submit-row {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .toolbar,
+      .submit-row,
+      .success {
+        display: none !important;
+      }
+
+      .page {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .form-header,
+      .question-card,
+      .section-heading {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="form-header">
+      <h1>Socio-Economic Survey 2026 -GDC Cheepurupalli</h1>
+      <p>Dear student go to a household in your village and fill the details of the family in this webform.</p>
+      <div class="required-note">* Indicates required question</div>
+    </header>
+
+    <div class="toolbar hidden">
+      <button type="button" class="secondary" onclick="downloadCSV()">Download CSV</button>
+      <button type="button" class="secondary" onclick="window.print()">Print</button>
+      <button type="button" class="danger" onclick="clearSavedResponses()">Clear Saved Responses</button>
+      <div class="count" id="recordCount">Saved responses: 0</div>
+    </div>
+
+    <div class="success" id="successBox">Response saved successfully in this browser.</div>
+
+    <form id="surveyForm" novalidate>
+
+      <div class="question-card " data-qno="1">
+        <label class="question-title" for="q1">
+          <span class="qno">1.</span> Name of the Student <span class="required">*</span>
+        </label>
+
+        
+        <input id="q1" name="1. Name of the Student" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="2">
+        <label class="question-title" for="q2">
+          <span class="qno">2.</span> Group <span class="required">*</span>
+        </label>
+
+        
+        <select id="q2" name="2. Group" required>
+          <option value="">Choose</option>
+          <option value="B.A Honours (Political Science) Sem II">B.A Honours (Political Science) Sem II</option>
+          <option value="B.Com Honours (Computer Applications) Sem II">B.Com Honours (Computer Applications) Sem II</option>
+          <option value="B.Sc Honours (Mathematics) Sem II">B.Sc Honours (Mathematics) Sem II</option>
+          <option value="B.Sc Honours (Chemistry) Sem II">B.Sc Honours (Chemistry) Sem II</option>
+          <option value="B.Sc Honours (Computer Science) Sem II">B.Sc Honours (Computer Science) Sem II</option>
+          <option value="B.Sc Honours (Zoology) Sem II">B.Sc Honours (Zoology) Sem II</option>
+          <option value="B.Sc Honours (Physics) Sem II">B.Sc Honours (Physics) Sem II</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="3">
+        <label class="question-title" for="q3">
+          <span class="qno">3.</span> Registration No <span class="required">*</span>
+        </label>
+
+        <div class="note">Note : Registration No means Your Hall Ticket No</div>
+        <input id="q3" name="3. Registration No" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="4">
+        <label class="question-title" for="q4">
+          <span class="qno">4.</span> email id <span class="required">*</span>
+        </label>
+
+        
+        <input id="q4" name="4. email id" type="email" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="5">
+        <label class="question-title" for="q5">
+          <span class="qno">5.</span> House No <span class="required">*</span>
+        </label>
+
+        
+        <input id="q5" name="5. House No" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="6">
+        <label class="question-title" for="q6">
+          <span class="qno">6.</span> Habitat <span class="required">*</span>
+        </label>
+
+        <div class="note">Note: Habitat means your village</div>
+        <input id="q6" name="6. Habitat" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="7">
+        <label class="question-title" for="q7">
+          <span class="qno">7.</span> Panchayat <span class="required">*</span>
+        </label>
+
+        
+        <input id="q7" name="7. Panchayat" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="8">
+        <label class="question-title" for="q8">
+          <span class="qno">8.</span> Post Office <span class="required">*</span>
+        </label>
+
+        
+        <input id="q8" name="8. Post Office" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="9">
+        <label class="question-title" for="q9">
+          <span class="qno">9.</span> Mandal <span class="required">*</span>
+        </label>
+
+        
+        <input id="q9" name="9. Mandal" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="10">
+        <label class="question-title" for="q10">
+          <span class="qno">10.</span> District <span class="required">*</span>
+        </label>
+
+        
+        <input id="q10" name="10. District" type="text" required placeholder="" />
+
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Family Details</h2>
+      <p>Enter the family details . Collect 4 members details in one family</p>
+    </section>
+
+
+      <div class="question-card " data-qno="11">
+        <label class="question-title" for="q11">
+          <span class="qno">11.</span> Name of the Person 1 <span class="required">*</span>
+        </label>
+
+        
+        <input id="q11" name="11. Name of the Person 1" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="12" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">12.</span> Gender <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="12. Gender" value="Male" />
+            <span>Male</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="12. Gender" value="Female" />
+            <span>Female</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="13">
+        <label class="question-title" for="q13">
+          <span class="qno">13.</span> Age <span class="required">*</span>
+        </label>
+
+        
+        <input id="q13" name="13. Age" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="14">
+        <label class="question-title" for="q14">
+          <span class="qno">14.</span> Education <span class="required">*</span>
+        </label>
+
+        
+        <select id="q14" name="14. Education" required>
+          <option value="">Choose</option>
+          <option value="Higher Education">Higher Education</option>
+          <option value="Secondary Education">Secondary Education</option>
+          <option value="Primary Education">Primary Education</option>
+          <option value="Un-Educated">Un-Educated</option>
+          <option value="Not Applicable">Not Applicable</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="15">
+        <label class="question-title" for="q15">
+          <span class="qno">15.</span> Profession/Occupation <span class="required">*</span>
+        </label>
+
+        
+        <select id="q15" name="15. Profession/Occupation" required>
+          <option value="">Choose</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Agricultural Labourer">Agricultural Labourer</option>
+          <option value="Dairy Farmer">Dairy Farmer</option>
+          <option value="Poultry Farmer">Poultry Farmer</option>
+          <option value="Fisherman">Fisherman</option>
+          <option value="Weaver">Weaver</option>
+          <option value="Blacksmith">Blacksmith</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Potter">Potter</option>
+          <option value="Goldsmith">Goldsmith</option>
+          <option value="Barber">Barber</option>
+          <option value="Washerman">Washerman</option>
+          <option value="Shopkeeper">Shopkeeper</option>
+          <option value="Tea Stall Owner">Tea Stall Owner</option>
+          <option value="Food Vendor">Food Vendor</option>
+          <option value="Tailor">Tailor</option>
+          <option value="Mechanic">Mechanic</option>
+          <option value="Auto Driver">Auto Driver</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Village Administrative Officer (VRO/VAO)">Village Administrative Officer (VRO/VAO)</option>
+          <option value="Health Worker (ANM/ASHA)">Health Worker (ANM/ASHA)</option>
+          <option value="Police">Police</option>
+          <option value="Bank Employee">Bank Employee</option>
+          <option value="Post Office Employee">Post Office Employee</option>
+          <option value="Construction Worker">Construction Worker</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Daily Wage Labourer">Daily Wage Labourer</option>
+          <option value="Self-Help Group Member">Self-Help Group Member</option>
+          <option value="Small Business Owner">Small Business Owner</option>
+          <option value="Food Processing Worker">Food Processing Worker</option>
+          <option value="Mobile Repair Technician">Mobile Repair Technician</option>
+          <option value="CSC/Digital Service Provider">CSC/Digital Service Provider</option>
+          <option value="House wife">House wife</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="16">
+        <label class="question-title" for="q16">
+          <span class="qno">16.</span> Name of the Person 2 <span class="required">*</span>
+        </label>
+
+        
+        <input id="q16" name="16. Name of the Person 2" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="17" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">17.</span> Gender. <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="17. Gender." value="Male" />
+            <span>Male</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="17. Gender." value="Female" />
+            <span>Female</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="17. Gender." value="NA" />
+            <span>NA</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="18">
+        <label class="question-title" for="q18">
+          <span class="qno">18.</span> Age. <span class="required">*</span>
+        </label>
+
+        
+        <input id="q18" name="18. Age." type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="19">
+        <label class="question-title" for="q19">
+          <span class="qno">19.</span> Education. <span class="required">*</span>
+        </label>
+
+        
+        <select id="q19" name="19. Education." required>
+          <option value="">Choose</option>
+          <option value="Higher Education">Higher Education</option>
+          <option value="Secondary Education">Secondary Education</option>
+          <option value="Primary Education">Primary Education</option>
+          <option value="Un-Educated">Un-Educated</option>
+          <option value="NA">NA</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="20">
+        <label class="question-title" for="q20">
+          <span class="qno">20.</span> Profession/Occupation <span class="required">*</span>
+        </label>
+
+        
+        <select id="q20" name="20. Profession/Occupation" required>
+          <option value="">Choose</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Agricultural Labourer">Agricultural Labourer</option>
+          <option value="Dairy Farmer">Dairy Farmer</option>
+          <option value="Poultry Farmer">Poultry Farmer</option>
+          <option value="Fisherman">Fisherman</option>
+          <option value="Weaver">Weaver</option>
+          <option value="Blacksmith">Blacksmith</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Potter">Potter</option>
+          <option value="Goldsmith">Goldsmith</option>
+          <option value="Barber">Barber</option>
+          <option value="Washerman">Washerman</option>
+          <option value="Shopkeeper">Shopkeeper</option>
+          <option value="Tea Stall Owner">Tea Stall Owner</option>
+          <option value="Food Vendor">Food Vendor</option>
+          <option value="Tailor">Tailor</option>
+          <option value="Mechanic">Mechanic</option>
+          <option value="Auto Driver">Auto Driver</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Village Administrative Officer (VRO/VAO)">Village Administrative Officer (VRO/VAO)</option>
+          <option value="Health Worker (ANM/ASHA)">Health Worker (ANM/ASHA)</option>
+          <option value="Police">Police</option>
+          <option value="Bank Employee">Bank Employee</option>
+          <option value="Post Office Employee">Post Office Employee</option>
+          <option value="Construction Worker">Construction Worker</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Daily Wage Labourer">Daily Wage Labourer</option>
+          <option value="Self-Help Group Member">Self-Help Group Member</option>
+          <option value="Small Business Owner">Small Business Owner</option>
+          <option value="Food Processing Worker">Food Processing Worker</option>
+          <option value="Mobile Repair Technician">Mobile Repair Technician</option>
+          <option value="CSC/Digital Service Provider">CSC/Digital Service Provider</option>
+          <option value="House wife">House wife</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="21">
+        <label class="question-title" for="q21">
+          <span class="qno">21.</span> Name of the Person 3 <span class="required">*</span>
+        </label>
+
+        
+        <input id="q21" name="21. Name of the Person 3" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="22" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">22.</span> Gender.. <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="22. Gender.." value="Male" />
+            <span>Male</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="22. Gender.." value="Female" />
+            <span>Female</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="22. Gender.." value="NA" />
+            <span>NA</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="23">
+        <label class="question-title" for="q23">
+          <span class="qno">23.</span> Age.. <span class="required">*</span>
+        </label>
+
+        
+        <input id="q23" name="23. Age.." type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="24">
+        <label class="question-title" for="q24">
+          <span class="qno">24.</span> Education.. <span class="required">*</span>
+        </label>
+
+        
+        <select id="q24" name="24. Education.." required>
+          <option value="">Choose</option>
+          <option value="Higher Education">Higher Education</option>
+          <option value="Secondary Education">Secondary Education</option>
+          <option value="Primary Education">Primary Education</option>
+          <option value="Un-Educated">Un-Educated</option>
+          <option value="NA">NA</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="25">
+        <label class="question-title" for="q25">
+          <span class="qno">25.</span> Profession/Occupation <span class="required">*</span>
+        </label>
+
+        
+        <select id="q25" name="25. Profession/Occupation" required>
+          <option value="">Choose</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Agricultural Labourer">Agricultural Labourer</option>
+          <option value="Dairy Farmer">Dairy Farmer</option>
+          <option value="Poultry Farmer">Poultry Farmer</option>
+          <option value="Fisherman">Fisherman</option>
+          <option value="Weaver">Weaver</option>
+          <option value="Blacksmith">Blacksmith</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Potter">Potter</option>
+          <option value="Goldsmith">Goldsmith</option>
+          <option value="Barber">Barber</option>
+          <option value="Washerman">Washerman</option>
+          <option value="Shopkeeper">Shopkeeper</option>
+          <option value="Tea Stall Owner">Tea Stall Owner</option>
+          <option value="Food Vendor">Food Vendor</option>
+          <option value="Tailor">Tailor</option>
+          <option value="Mechanic">Mechanic</option>
+          <option value="Auto Driver">Auto Driver</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Village Administrative Officer (VRO/VAO)">Village Administrative Officer (VRO/VAO)</option>
+          <option value="Health Worker (ANM/ASHA)">Health Worker (ANM/ASHA)</option>
+          <option value="Police">Police</option>
+          <option value="Bank Employee">Bank Employee</option>
+          <option value="Post Office Employee">Post Office Employee</option>
+          <option value="Construction Worker">Construction Worker</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Daily Wage Labourer">Daily Wage Labourer</option>
+          <option value="Self-Help Group Member">Self-Help Group Member</option>
+          <option value="Small Business Owner">Small Business Owner</option>
+          <option value="Food Processing Worker">Food Processing Worker</option>
+          <option value="Mobile Repair Technician">Mobile Repair Technician</option>
+          <option value="CSC/Digital Service Provider">CSC/Digital Service Provider</option>
+          <option value="House wife">House wife</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="26">
+        <label class="question-title" for="q26">
+          <span class="qno">26.</span> Name of the Person 4 <span class="required">*</span>
+        </label>
+
+        
+        <input id="q26" name="26. Name of the Person 4" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="27" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">27.</span> Gender... <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="27. Gender..." value="Male" />
+            <span>Male</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="27. Gender..." value="Female" />
+            <span>Female</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="27. Gender..." value="NA" />
+            <span>NA</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="28">
+        <label class="question-title" for="q28">
+          <span class="qno">28.</span> Age... <span class="required">*</span>
+        </label>
+
+        
+        <input id="q28" name="28. Age..." type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="29">
+        <label class="question-title" for="q29">
+          <span class="qno">29.</span> Education... <span class="required">*</span>
+        </label>
+
+        
+        <select id="q29" name="29. Education..." required>
+          <option value="">Choose</option>
+          <option value="Higher Education">Higher Education</option>
+          <option value="Secondary Education">Secondary Education</option>
+          <option value="Primary Education">Primary Education</option>
+          <option value="Un-Educated">Un-Educated</option>
+          <option value="NA">NA</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="30">
+        <label class="question-title" for="q30">
+          <span class="qno">30.</span> Profession/Occupation <span class="required">*</span>
+        </label>
+
+        
+        <select id="q30" name="30. Profession/Occupation" required>
+          <option value="">Choose</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Agricultural Labourer">Agricultural Labourer</option>
+          <option value="Dairy Farmer">Dairy Farmer</option>
+          <option value="Poultry Farmer">Poultry Farmer</option>
+          <option value="Fisherman">Fisherman</option>
+          <option value="Weaver">Weaver</option>
+          <option value="Blacksmith">Blacksmith</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Potter">Potter</option>
+          <option value="Goldsmith">Goldsmith</option>
+          <option value="Barber">Barber</option>
+          <option value="Washerman">Washerman</option>
+          <option value="Shopkeeper">Shopkeeper</option>
+          <option value="Tea Stall Owner">Tea Stall Owner</option>
+          <option value="Food Vendor">Food Vendor</option>
+          <option value="Tailor">Tailor</option>
+          <option value="Mechanic">Mechanic</option>
+          <option value="Auto Driver">Auto Driver</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Village Administrative Officer (VRO/VAO)">Village Administrative Officer (VRO/VAO)</option>
+          <option value="Health Worker (ANM/ASHA)">Health Worker (ANM/ASHA)</option>
+          <option value="Police">Police</option>
+          <option value="Bank Employee">Bank Employee</option>
+          <option value="Post Office Employee">Post Office Employee</option>
+          <option value="Construction Worker">Construction Worker</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Daily Wage Labourer">Daily Wage Labourer</option>
+          <option value="Self-Help Group Member">Self-Help Group Member</option>
+          <option value="Small Business Owner">Small Business Owner</option>
+          <option value="Food Processing Worker">Food Processing Worker</option>
+          <option value="Mobile Repair Technician">Mobile Repair Technician</option>
+          <option value="CSC/Digital Service Provider">CSC/Digital Service Provider</option>
+          <option value="House wife">House wife</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+        </select>
+
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Social Status Details</h2>
+      <p>Please fill the caste subcaste and Religion details</p>
+    </section>
+
+
+      <div class="question-card " data-qno="31">
+        <label class="question-title" for="q31">
+          <span class="qno">31.</span> Caste <span class="required">*</span>
+        </label>
+
+        
+        <select id="q31" name="31. Caste" required>
+          <option value="">Choose</option>
+          <option value="sc">sc</option>
+          <option value="ST">ST</option>
+          <option value="BC-A">BC-A</option>
+          <option value="BC-B">BC-B</option>
+          <option value="BC-C">BC-C</option>
+          <option value="BC-D">BC-D</option>
+          <option value="BC-E">BC-E</option>
+          <option value="Oc">Oc</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="32">
+        <label class="question-title" for="q32">
+          <span class="qno">32.</span> Sub Caste <span class="required">*</span>
+        </label>
+
+        
+        <input id="q32" name="32. Sub Caste" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="33" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">33.</span> Religion <span class="required">*</span>
+        </div>
+        <div class="note">Mark only one oval.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="33. Religion" value="Hindu" />
+            <span>Hindu</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="33. Religion" value="Christian" />
+            <span>Christian</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="33. Religion" value="Muslim" />
+            <span>Muslim</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="33. Religion" value="Buddist" />
+            <span>Buddist</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Economic Status Details</h2>
+      <p>Please fill the economic status details</p>
+    </section>
+
+
+      <div class="question-card " data-qno="34">
+        <label class="question-title" for="q34">
+          <span class="qno">34.</span> Type of house building <span class="required">*</span>
+        </label>
+
+        
+        <select id="q34" name="34. Type of house building" required>
+          <option value="">Choose</option>
+          <option value="Hut">Hut</option>
+          <option value="Semi Pucca">Semi Pucca</option>
+          <option value="Pucca">Pucca</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Bunglaw">Bunglaw</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="35">
+        <label class="question-title" for="q35">
+          <span class="qno">35.</span> Nature of hose building <span class="required">*</span>
+        </label>
+
+        
+        <select id="q35" name="35. Nature of hose building" required>
+          <option value="">Choose</option>
+          <option value="Own">Own</option>
+          <option value="Rented">Rented</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="36">
+        <label class="question-title" for="q36">
+          <span class="qno">36.</span> Drinking water facility <span class="required">*</span>
+        </label>
+
+        
+        <select id="q36" name="36. Drinking water facility" required>
+          <option value="">Choose</option>
+          <option value="Well">Well</option>
+          <option value="Borewell">Borewell</option>
+          <option value="Government Tap Connection">Government Tap Connection</option>
+          <option value="Common tap">Common tap</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="37" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">37.</span> Availability of agricultural land <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="37. Availability of agricultural land" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="37. Availability of agricultural land" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="38">
+        <label class="question-title" for="q38">
+          <span class="qno">38.</span> Extent of agricultural land (in acres) <span class="required">*</span>
+        </label>
+
+        
+        <input id="q38" name="38. Extent of agricultural land (in acres)" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="39" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">39.</span> Names of crops <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="Paddy" />
+            <span>Paddy</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="Sugarcane" />
+            <span>Sugarcane</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="Groundnuts" />
+            <span>Groundnuts</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="Vegetables" />
+            <span>Vegetables</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="Any other" />
+            <span>Any other</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="39. Names of crops" value="maize" />
+            <span>maize</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="40">
+        <label class="question-title" for="q40">
+          <span class="qno">40.</span> No of cows <span class="required">*</span>
+        </label>
+
+        
+        <input id="q40" name="40. No of cows" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="41">
+        <label class="question-title" for="q41">
+          <span class="qno">41.</span> No of ox <span class="required">*</span>
+        </label>
+
+        
+        <input id="q41" name="41. No of ox" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="42">
+        <label class="question-title" for="q42">
+          <span class="qno">42.</span> No of buffaloes <span class="required">*</span>
+        </label>
+
+        
+        <input id="q42" name="42. No of buffaloes" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="43">
+        <label class="question-title" for="q43">
+          <span class="qno">43.</span> No of sheeps and goats <span class="required">*</span>
+        </label>
+
+        
+        <input id="q43" name="43. No of sheeps and goats" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="44" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">44.</span> Do you have own toilet <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="44. Do you have own toilet" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="44. Do you have own toilet" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="45" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">45.</span> Type of coocking fuel used <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="45. Type of coocking fuel used" value="LPG Gas" />
+            <span>LPG Gas</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="45. Type of coocking fuel used" value="Kirosene" />
+            <span>Kirosene</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="45. Type of coocking fuel used" value="Electricity" />
+            <span>Electricity</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="45. Type of coocking fuel used" value="Wood" />
+            <span>Wood</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="45. Type of coocking fuel used" value="Others" />
+            <span>Others</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="46" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">46.</span> Is any family member part of Dwacra Group <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="46. Is any family member part of Dwacra Group" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="46. Is any family member part of Dwacra Group" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="47" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">47.</span> Do you have ration card <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="47. Do you have ration card" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="47. Do you have ration card" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="48" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">48.</span> Type of vehicle you have <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="48. Type of vehicle you have" value="Two wheeler" />
+            <span>Two wheeler</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="48. Type of vehicle you have" value="Auto" />
+            <span>Auto</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="48. Type of vehicle you have" value="Car" />
+            <span>Car</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="48. Type of vehicle you have" value="No Vehicle" />
+            <span>No Vehicle</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="48. Type of vehicle you have" value="Any other vehicle" />
+            <span>Any other vehicle</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Health Details</h2>
+      <p>Please enter the health details of the family</p>
+    </section>
+
+
+      <div class="question-card " data-qno="49">
+        <label class="question-title" for="q49">
+          <span class="qno">49.</span> Diseases in family <span class="required">*</span>
+        </label>
+
+        
+        <textarea id="q49" name="49. Diseases in family" required placeholder=""></textarea>
+
+      </div>
+
+
+      <div class="question-card " data-qno="50">
+        <label class="question-title" for="q50">
+          <span class="qno">50.</span> Treatment in which hospital <span class="required">*</span>
+        </label>
+
+        
+        <input id="q50" name="50. Treatment in which hospital" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="51" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">51.</span> Do you have Government Arogyasri Card <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="51. Do you have Government Arogyasri Card" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="51. Do you have Government Arogyasri Card" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="52">
+        <label class="question-title" for="q52">
+          <span class="qno">52.</span> Any physical handicapped persons in family <span class="required">*</span>
+        </label>
+
+        <div class="note">No - Skip to question 57</div>
+        <select id="q52" name="52. Any physical handicapped persons in family" required>
+          <option value="">Choose</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+      </div>
+
+
+    <section class="section-heading" id="phDetailsHeading">
+      <h2>Enter the Physically handicapped details below</h2>
+      
+    </section>
+
+
+      <div class="question-card " data-qno="53">
+        <label class="question-title" for="q53">
+          <span class="qno">53.</span> Name of the person <span class="required">*</span>
+        </label>
+
+        
+        <input id="q53" name="53. Name of the person" type="text" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="54" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">54.</span> Gender of ph <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="54. Gender of ph" value="Male" />
+            <span>Male</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="54. Gender of ph" value="Female" />
+            <span>Female</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="55">
+        <label class="question-title" for="q55">
+          <span class="qno">55.</span> Age of ph <span class="required">*</span>
+        </label>
+
+        
+        <input id="q55" name="55. Age of ph" type="number" required placeholder="" />
+
+      </div>
+
+
+      <div class="question-card " data-qno="56">
+        <label class="question-title" for="q56">
+          <span class="qno">56.</span> Nature of disability <span class="required">*</span>
+        </label>
+
+        
+        <textarea id="q56" name="56. Nature of disability" required placeholder=""></textarea>
+
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Other Details</h2>
+      <p>Please enter the home appliances details</p>
+    </section>
+
+
+      <div class="question-card checkbox-card " data-qno="57" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">57.</span> Do you have TV <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="57. Do you have TV" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="57. Do you have TV" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="58" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">58.</span> Do you have Dish Connection <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="58. Do you have Dish Connection" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="58. Do you have Dish Connection" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="59" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">59.</span> Do you have Laptop <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="59. Do you have Laptop" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="59. Do you have Laptop" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card checkbox-card " data-qno="60" data-required-group="true">
+        <div class="question-title">
+          <span class="qno">60.</span> Is internet available at home <span class="required">*</span>
+        </div>
+        <div class="note">Tick all that apply.</div>
+        <div class="choice-grid">
+          <label class="choice">
+            <input type="checkbox" name="60. Is internet available at home" value="Yes" />
+            <span>Yes</span>
+          </label>
+          <label class="choice">
+            <input type="checkbox" name="60. Is internet available at home" value="No" />
+            <span>No</span>
+          </label>
+        </div>
+        <div class="error-text">Please select at least one option.</div>
+      </div>
+
+
+      <div class="question-card " data-qno="61">
+        <label class="question-title" for="q61">
+          <span class="qno">61.</span> Channels watched regularly <span class="required">*</span>
+        </label>
+
+        
+        <textarea id="q61" name="61. Channels watched regularly" required placeholder=""></textarea>
+
+      </div>
+
+
+      <div class="question-card " data-qno="62">
+        <label class="question-title" for="q62">
+          <span class="qno">62.</span> Do you have mobile <span class="required">*</span>
+        </label>
+
+        
+        <select id="q62" name="62. Do you have mobile" required>
+          <option value="">Choose</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Mobile details</h2>
+      
+    </section>
+
+
+      <div class="question-card " data-qno="63">
+        <label class="question-title" for="q63">
+          <span class="qno">63.</span> Mobile No <span class="required">*</span>
+        </label>
+
+        
+        <input id="q63" name="63. Mobile No" type="tel" required placeholder="" />
+
+      </div>
+
+
+    <section class="section-heading">
+      <h2>Any three problems faced in the village</h2>
+      <p>Write problems faced in the village</p>
+    </section>
+
+
+      <div class="question-card " data-qno="64">
+        <label class="question-title" for="q64">
+          <span class="qno">64.</span> Problem 1 <span class="required">*</span>
+        </label>
+
+        
+        <select id="q64" name="64. Problem 1" required>
+          <option value="">Choose</option>
+          <option value="Drinking water">Drinking water</option>
+          <option value="Water problem">Water problem</option>
+          <option value="Electricity">Electricity</option>
+          <option value="Roads and connectivity">Roads and connectivity</option>
+          <option value="Medical facilities">Medical facilities</option>
+          <option value="Unemployment">Unemployment</option>
+          <option value="Child Labour">Child Labour</option>
+          <option value="Poverty">Poverty</option>
+          <option value="Lack of Communication network">Lack of Communication network</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Illiterycy">Illiterycy</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="65">
+        <label class="question-title" for="q65">
+          <span class="qno">65.</span> Problem 2 <span class="required">*</span>
+        </label>
+
+        
+        <select id="q65" name="65. Problem 2" required>
+          <option value="">Choose</option>
+          <option value="Drinking water">Drinking water</option>
+          <option value="Water problem">Water problem</option>
+          <option value="Electricity">Electricity</option>
+          <option value="Roads and connectivity">Roads and connectivity</option>
+          <option value="Medical facilities">Medical facilities</option>
+          <option value="Unemployment">Unemployment</option>
+          <option value="Child Labour">Child Labour</option>
+          <option value="Poverty">Poverty</option>
+          <option value="Lack of Communication network">Lack of Communication network</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Illiterycy">Illiterycy</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="66">
+        <label class="question-title" for="q66">
+          <span class="qno">66.</span> Problem 3 <span class="required">*</span>
+        </label>
+
+        
+        <select id="q66" name="66. Problem 3" required>
+          <option value="">Choose</option>
+          <option value="Drinking water">Drinking water</option>
+          <option value="Water problem">Water problem</option>
+          <option value="Electricity">Electricity</option>
+          <option value="Roads and connectivity">Roads and connectivity</option>
+          <option value="Medical facilities">Medical facilities</option>
+          <option value="Unemployment">Unemployment</option>
+          <option value="Child Labour">Child Labour</option>
+          <option value="Poverty">Poverty</option>
+          <option value="Lack of Communication network">Lack of Communication network</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Illiterycy">Illiterycy</option>
+        </select>
+
+      </div>
+
+
+      <div class="question-card " data-qno="67">
+        <label class="question-title" for="q67">
+          <span class="qno">67.</span> Upload survey image <span class="required">*</span>
+        </label>
+
+        <div class="note">Note : Take image through your mobile in landscape mode and upload immediately . File size should be less than 1MB</div>
+        <input id="q67" name="67. Upload survey image" type="file" accept="image/*" required />
+        <div class="note">In this standalone HTML version, the selected file name is recorded in CSV. The actual image file is not stored in browser CSV data.</div>
+
+      </div>
+
+
+      <div class="submit-row">
+        <button type="reset" class="secondary">Clear form</button>
+        <button type="submit" class="primary">Submit</button>
+      </div>
+    </form>
+
+    <div class="footer-note">
+      Standalone custom HTML version. Responses are saved in this browser and can be exported as CSV.
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "gdc_cheepurupalli_socio_economic_survey_2026";
+
+    // STEP 1:
+    // After deploying the Google Apps Script as a Web App,
+    // paste the Web App URL below between the quotes.
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxV6D3HaToZ1KkDEYl80IlPLRgGhVeEfB0dsXKSSY5nDfjBljqE0BzUSen9yhuXz4O4FA/exec";
+
+    const form = document.getElementById("surveyForm");
+    const successBox = document.getElementById("successBox");
+    const recordCount = document.getElementById("recordCount");
+
+    let keepSuccessMessageAfterReset = false;
+
+    const phSelect = document.getElementById("q52");
+    const phQuestionNumbers = ["53", "54", "55", "56"];
+
+    function getSavedResponses() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveResponses(items) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      updateRecordCount();
+    }
+
+    function updateRecordCount() {
+      const count = getSavedResponses().length;
+      recordCount.textContent = "Saved responses: " + count;
+    }
+
+    function setHandicappedVisibility() {
+      const show = phSelect.value === "Yes";
+      const phHeading = document.getElementById("phDetailsHeading");
+
+      if (phHeading) {
+        phHeading.classList.toggle("hidden", !show);
+      }
+
+      phQuestionNumbers.forEach(num => {
+        const card = document.querySelector('[data-qno="' + num + '"]');
+        if (!card) return;
+
+        card.classList.toggle("hidden", !show);
+
+        card.querySelectorAll("input, textarea, select").forEach(input => {
+          if (!show) {
+            input.dataset.wasRequired = input.required ? "true" : "false";
+            input.required = false;
+            if (input.type === "checkbox") input.checked = false;
+            else input.value = "";
+          } else if (input.dataset.wasRequired === "true") {
+            input.required = true;
+          }
+        });
+
+        if (!show) {
+          card.classList.remove("invalid-card");
+        }
+      });
+    }
+
+    phSelect.addEventListener("change", setHandicappedVisibility);
+    setHandicappedVisibility();
+
+    function validateRequiredCheckboxGroups() {
+      let valid = true;
+      document.querySelectorAll('[data-required-group="true"]').forEach(card => {
+        if (card.classList.contains("hidden")) return;
+        const checked = card.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+        card.classList.toggle("invalid-card", !checked);
+        if (!checked) valid = false;
+      });
+      return valid;
+    }
+
+    function validateRequiredStandardFields() {
+      let valid = true;
+      form.querySelectorAll("input[required], select[required], textarea[required]").forEach(field => {
+        const card = field.closest(".question-card");
+        if (card && card.classList.contains("hidden")) return;
+
+        if (field.type === "checkbox") return;
+
+        const emptyFile = field.type === "file" && field.files.length === 0;
+        const emptyText = field.type !== "file" && !field.value.trim();
+
+        if (emptyFile || emptyText) {
+          valid = false;
+          if (card) card.classList.add("invalid-card");
+        } else if (card) {
+          card.classList.remove("invalid-card");
+        }
+      });
+      return valid;
+    }
+
+    function collectFormData() {
+      const data = {};
+      const elements = Array.from(form.elements).filter(el => el.name);
+
+      elements.forEach(el => {
+        const card = el.closest(".question-card");
+        if (card && card.classList.contains("hidden")) return;
+
+        if (el.type === "checkbox") {
+          if (!el.checked) return;
+          if (data[el.name]) {
+            data[el.name] += "; " + el.value;
+          } else {
+            data[el.name] = el.value;
+          }
+          return;
+        }
+
+        if (el.type === "file") {
+          const names = Array.from(el.files).map(file => file.name).join("; ");
+          data[el.name] = names;
+          return;
+        }
+
+        data[el.name] = el.value;
+      });
+
+      data["Submission timestamp"] = new Date().toLocaleString();
+      return data;
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function collectSubmissionPackage() {
+      const data = collectFormData();
+      const fileInput = document.getElementById("q67");
+      let file = null;
+
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        const selectedFile = fileInput.files[0];
+
+        file = {
+          fieldName: "67. Upload survey image",
+          fileName: selectedFile.name,
+          mimeType: selectedFile.type || "application/octet-stream",
+          base64: await fileToBase64(selectedFile)
+        };
+
+        data["67. Upload survey image"] = selectedFile.name;
+      }
+
+      return { data, file };
+    }
+
+    async function sendToGoogleDriveAndSheet(submissionPackage) {
+      if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE")) {
+        return { skipped: true };
+      }
+
+      await fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(submissionPackage)
+      });
+
+      return { sent: true };
+    }
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function startAnotherSurvey() {
+      successBox.style.display = "none";
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const validStandard = validateRequiredStandardFields();
+      const validCheckboxes = validateRequiredCheckboxGroups();
+
+      if (!validStandard || !validCheckboxes) {
+        const firstInvalid = document.querySelector(".invalid-card");
+        if (firstInvalid) firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton ? submitButton.textContent : "Submit";
+
+      try {
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Submitting...";
+        }
+
+        const submissionPackage = await collectSubmissionPackage();
+
+        const responses = getSavedResponses();
+        responses.push(submissionPackage.data);
+        saveResponses(responses);
+
+        await sendToGoogleDriveAndSheet(submissionPackage);
+
+        const personOneName = submissionPackage.data["11. Name of the Person 1"] || "this";
+        const safePersonOneName = escapeHTML(personOneName);
+
+        successBox.innerHTML =
+          "<strong>You are successfully completed socioeconomic survey of " +
+          safePersonOneName +
+          " family.</strong>" +
+          "<button type=\"button\" onclick=\"startAnotherSurvey()\">Do another survey</button>";
+
+        successBox.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        keepSuccessMessageAfterReset = true;
+        form.reset();
+
+        setHandicappedVisibility();
+      } catch (error) {
+        alert("The response was saved in this browser, but online submission failed. Please check the Apps Script Web App URL and internet connection.");
+        console.error(error);
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+    });
+
+    form.addEventListener("reset", function() {
+      setTimeout(() => {
+        document.querySelectorAll(".invalid-card").forEach(card => card.classList.remove("invalid-card"));
+
+        if (keepSuccessMessageAfterReset) {
+          keepSuccessMessageAfterReset = false;
+        } else {
+          successBox.style.display = "none";
+        }
+
+        setHandicappedVisibility();
+      }, 0);
+    });
+
+    function escapeCSV(value) {
+      if (value === null || value === undefined) return '""';
+      return '"' + String(value).replaceAll('"', '""') + '"';
+    }
+
+    function downloadCSV() {
+      const responses = getSavedResponses();
+      if (responses.length === 0) {
+        alert("No saved responses found.");
+        return;
+      }
+
+      const headers = Array.from(responses.reduce((set, item) => {
+        Object.keys(item).forEach(key => set.add(key));
+        return set;
+      }, new Set()));
+
+      const rows = [headers.map(escapeCSV).join(",")];
+      responses.forEach(item => {
+        rows.push(headers.map(header => escapeCSV(item[header] || "")).join(","));
+      });
+
+      const blob = new Blob(["\uFEFF" + rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Socio_Economic_Survey_2026_Responses.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function clearSavedResponses() {
+      if (!confirm("Delete all saved responses from this browser?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      updateRecordCount();
+      successBox.style.display = "none";
+    }
+
+    updateRecordCount();
+  </script>
+</body>
+</html>
