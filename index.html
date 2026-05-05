@@ -271,6 +271,10 @@
       display: block;
     }
 
+    .optional-checkbox-card .error-text {
+      display: none !important;
+    }
+
     .invalid-card {
       border-color: var(--danger);
     }
@@ -1075,14 +1079,14 @@
         
         <select id="q31" name="31. Caste" required>
           <option value="">Choose</option>
-          <option value="SC">SC</option>
+          <option value="sc">sc</option>
           <option value="ST">ST</option>
           <option value="BC-A">BC-A</option>
           <option value="BC-B">BC-B</option>
           <option value="BC-C">BC-C</option>
           <option value="BC-D">BC-D</option>
           <option value="BC-E">BC-E</option>
-          <option value="OC">OC</option>
+          <option value="Oc">Oc</option>
         </select>
 
       </div>
@@ -1120,10 +1124,6 @@
           <label class="choice">
             <input type="checkbox" name="33. Religion" value="Buddist" />
             <span>Buddist</span>
-          </label>
-          <label class="choice">
-            <input type="checkbox" name="33. Religion" value="Other" />
-            <span>Other</span>
           </label>
         </div>
         <div class="error-text">Please select at least one option.</div>
@@ -1973,11 +1973,33 @@
       return "";
     }
 
-    function getCheckboxGroupValue(fieldName) {
+    function getCheckboxGroupValues(fieldName) {
       return Array.from(form.querySelectorAll('input[type="checkbox"]'))
         .filter(item => item.name === fieldName && item.checked)
-        .map(item => item.value)
-        .join("; ");
+        .map(item => item.value);
+    }
+
+    function clearCheckboxCardError(qno) {
+      const card = document.querySelector('[data-qno="' + qno + '"]');
+      if (!card) return;
+      card.classList.remove("invalid-card");
+      const messageBox = card.querySelector(".field-error-message");
+      if (messageBox) messageBox.textContent = "";
+    }
+
+    function setCheckboxCardError(qno, message) {
+      const card = document.querySelector('[data-qno="' + qno + '"]');
+      if (!card) return;
+      card.classList.add("invalid-card");
+
+      let messageBox = card.querySelector(".field-error-message");
+      if (!messageBox) {
+        messageBox = document.createElement("div");
+        messageBox.className = "field-error-message";
+        card.appendChild(messageBox);
+      }
+
+      messageBox.textContent = message;
     }
 
     function validateOptionalFamilyMembers() {
@@ -1986,109 +2008,99 @@
       const members = [
         {
           label: "Person 2",
+          genderName: "17. Gender.",
+          genderQno: "17",
           fields: [
-            { id: "q16", label: "Name" },
-            { checkboxName: "17. Gender.", label: "Gender", qno: "17" },
-            { id: "q18", label: "Age" },
-            { id: "q19", label: "Education" },
-            { id: "q20", label: "Profession/Occupation" }
+            { id: "q16" },
+            { id: "q18" },
+            { id: "q19" },
+            { id: "q20" }
           ]
         },
         {
           label: "Person 3",
+          genderName: "22. Gender..",
+          genderQno: "22",
           fields: [
-            { id: "q21", label: "Name" },
-            { checkboxName: "22. Gender..", label: "Gender", qno: "22" },
-            { id: "q23", label: "Age" },
-            { id: "q24", label: "Education" },
-            { id: "q25", label: "Profession/Occupation" }
+            { id: "q21" },
+            { id: "q23" },
+            { id: "q24" },
+            { id: "q25" }
           ]
         },
         {
           label: "Person 4",
+          genderName: "27. Gender...",
+          genderQno: "27",
           fields: [
-            { id: "q26", label: "Name" },
-            { checkboxName: "27. Gender...", label: "Gender", qno: "27" },
-            { id: "q28", label: "Age" },
-            { id: "q29", label: "Education" },
-            { id: "q30", label: "Profession/Occupation" }
+            { id: "q26" },
+            { id: "q28" },
+            { id: "q29" },
+            { id: "q30" }
           ]
         }
       ];
 
       members.forEach(member => {
+        const genderValues = getCheckboxGroupValues(member.genderName);
+        const selectedNA = genderValues.includes("NA");
+        const selectedMaleFemale = genderValues.some(value => value === "Male" || value === "Female");
+
         const fieldStates = member.fields.map(field => {
-          if (field.id) {
-            const element = document.getElementById(field.id);
-            return {
-              field,
-              element,
-              hasValue: element && String(element.value || "").trim().length > 0
-            };
-          }
-
-          const hasValue = getCheckboxGroupValue(field.checkboxName).length > 0;
-          const card = document.querySelector('[data-qno="' + field.qno + '"]');
-
+          const element = document.getElementById(field.id);
           return {
-            field,
-            element: card,
-            hasValue
+            element,
+            hasValue: element && String(element.value || "").trim().length > 0
           };
         });
 
-        const started = fieldStates.some(item => item.hasValue);
+        const anyTextFieldFilled = fieldStates.some(item => item.hasValue);
 
-        if (!started) {
+        // Fully blank optional member section is allowed.
+        if (!anyTextFieldFilled && genderValues.length === 0) {
+          clearCheckboxCardError(member.genderQno);
           fieldStates.forEach(item => {
-            if (item.field.id && item.element) {
-              clearCardError(item.element);
-            }
-
-            if (item.field.qno) {
-              const card = document.querySelector('[data-qno="' + item.field.qno + '"]');
-              if (card) {
-                card.classList.remove("invalid-card");
-                const messageBox = card.querySelector(".field-error-message");
-                if (messageBox) messageBox.textContent = "";
-              }
-            }
+            if (item.element) clearCardError(item.element);
           });
           return;
         }
 
+        // NA alone is allowed for optional members.
+        if (!anyTextFieldFilled && selectedNA && !selectedMaleFemale) {
+          clearCheckboxCardError(member.genderQno);
+          fieldStates.forEach(item => {
+            if (item.element) clearCardError(item.element);
+          });
+          return;
+        }
+
+        // NA cannot be combined with Male/Female or with entered details.
+        if (selectedNA && (selectedMaleFemale || anyTextFieldFilled)) {
+          valid = false;
+          setCheckboxCardError(member.genderQno, member.label + ": Select NA alone, or select Male/Female and complete the member details.");
+        } else if (!selectedMaleFemale) {
+          valid = false;
+          setCheckboxCardError(member.genderQno, member.label + " gender is required if this member's details are entered.");
+        } else {
+          clearCheckboxCardError(member.genderQno);
+        }
+
+        // If the member section is started, all related fields must be completed.
         fieldStates.forEach(item => {
-          if (item.hasValue) {
-            if (item.field.id && item.element) {
-              const specificError = validateSpecificField(item.element);
-              if (specificError) {
-                valid = false;
-                setCardError(item.element, specificError);
-              } else {
-                clearCardError(item.element);
-              }
-            }
+          if (!item.element) return;
+
+          if (!item.hasValue) {
+            valid = false;
+            setCardError(item.element, member.label + " details are incomplete. Please complete this field or keep the full member section blank.");
             return;
           }
 
-          valid = false;
-
-          if (item.field.id && item.element) {
-            setCardError(item.element, member.label + " details are incomplete. Please complete this field or keep the full member section blank.");
-          }
-
-          if (item.field.qno) {
-            const card = document.querySelector('[data-qno="' + item.field.qno + '"]');
-            if (card) {
-              card.classList.add("invalid-card");
-              let messageBox = card.querySelector(".field-error-message");
-              if (!messageBox) {
-                messageBox = document.createElement("div");
-                messageBox.className = "field-error-message";
-                card.appendChild(messageBox);
-              }
-              messageBox.textContent = member.label + " details are incomplete. Please select gender or keep the full member section blank.";
-            }
+          const specificError = validateSpecificField(item.element);
+          if (specificError) {
+            valid = false;
+            setCardError(item.element, specificError);
+          } else {
+            clearCardError(item.element);
           }
         });
       });
