@@ -490,7 +490,12 @@
 
     <form id="surveyForm" novalidate>
 
-      <div class="question-card " data-qno="1">
+          <section class="section-heading">
+      <h2>Student Details</h2>
+      <p>Enter student identification details.</p>
+    </section>
+
+<div class="question-card " data-qno="1">
         <label class="question-title" for="q1">
           <span class="qno">1.</span> Name of the Student <span class="required">*</span>
         </label>
@@ -543,7 +548,12 @@
       </div>
 
 
-      <div class="question-card " data-qno="5">
+          <section class="section-heading">
+      <h2>Family Details</h2>
+      <p>Enter household and family details. At least one family member must be entered.</p>
+    </section>
+
+<div class="question-card " data-qno="5">
         <label class="question-title" for="q5">
           <span class="qno">5.</span> House No <span class="required">*</span>
         </label>
@@ -607,15 +617,7 @@
         <input id="q10" name="10. District" type="text" required placeholder="Enter district name only" />
 
       </div>
-
-
-    <section class="section-heading">
-      <h2>Family Details</h2>
-      <p>Enter the family details . Collect 4 members details in one family</p>
-    </section>
-
-
-      <div class="question-card " data-qno="11">
+<div class="question-card " data-qno="11">
         <label class="question-title" for="q11">
           <span class="qno">11.</span> Name of the Person 1 <span class="required">*</span>
         </label>
@@ -1073,14 +1075,14 @@
         
         <select id="q31" name="31. Caste" required>
           <option value="">Choose</option>
-          <option value="SC">SC</option>
+          <option value="sc">sc</option>
           <option value="ST">ST</option>
           <option value="BC-A">BC-A</option>
           <option value="BC-B">BC-B</option>
           <option value="BC-C">BC-C</option>
           <option value="BC-D">BC-D</option>
           <option value="BC-E">BC-E</option>
-          <option value="OC">OC</option>
+          <option value="Oc">Oc</option>
         </select>
 
       </div>
@@ -1237,7 +1239,7 @@
             <span>Any other</span>
           </label>
           <label class="choice">
-            <input type="checkbox" name="39. Names of crops" value="Not Applicable" />
+            <input type="checkbox" name="39. Names of crops" value="maize" />
             <span>maize</span>
           </label>
         </div>
