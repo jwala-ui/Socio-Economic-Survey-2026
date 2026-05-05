@@ -1072,14 +1072,14 @@
         
         <select id="q31" name="31. Caste" required>
           <option value="">Choose</option>
-          <option value="sc">sc</option>
+          <option value="SC">SC</option>
           <option value="ST">ST</option>
           <option value="BC-A">BC-A</option>
           <option value="BC-B">BC-B</option>
           <option value="BC-C">BC-C</option>
           <option value="BC-D">BC-D</option>
           <option value="BC-E">BC-E</option>
-          <option value="Oc">Oc</option>
+          <option value="OC">OC</option>
         </select>
 
       </div>
@@ -1115,8 +1115,8 @@
             <span>Muslim</span>
           </label>
           <label class="choice">
-            <input type="checkbox" name="33. Religion" value="Buddist" />
-            <span>Buddist</span>
+            <input type="checkbox" name="33. Religion" value="Other" />
+            <span>Other</span>
           </label>
         </div>
         <div class="error-text">Please select at least one option.</div>
@@ -1236,8 +1236,8 @@
             <span>Any other</span>
           </label>
           <label class="choice">
-            <input type="checkbox" name="39. Names of crops" value="maize" />
-            <span>maize</span>
+            <input type="checkbox" name="39. Names of crops" value="Not Applicable" />
+            <span>Not Applicable</span>
           </label>
         </div>
         <div class="error-text">Please select at least one option.</div>
@@ -1615,7 +1615,7 @@
         </label>
 
         
-        <textarea id="q61" name="61. Channels watched regularly" required placeholder="Enter text only. Numbers are not allowed"></textarea>
+        <textarea id="q61" name="61. Channels watched regularly" required placeholder="Enter channel names or numbers, e.g., ETV, TV9, 10TV, Gemini"></textarea>
 
       </div>
 
@@ -1913,7 +1913,7 @@
         }
       }
 
-      if (["q6", "q7", "q8", "q9", "q10", "q32", "q49", "q50", "q56", "q61"].includes(id)) {
+      if (["q6", "q7", "q8", "q9", "q10", "q32", "q49", "q50", "q56"].includes(id)) {
         if (containsNumber(value)) {
           return "Numbers are not allowed in this text field.";
         }
@@ -2270,7 +2270,7 @@
       form.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    const textOnlyFieldIds = ["q1", "q6", "q7", "q8", "q9", "q10", "q11", "q16", "q21", "q26", "q32", "q49", "q50", "q53", "q56", "q61"];
+    const textOnlyFieldIds = ["q1", "q6", "q7", "q8", "q9", "q10", "q11", "q16", "q21", "q26", "q32", "q49", "q50", "q53", "q56"];
     const digitOnlyFieldIds = ["q3", "q13", "q18", "q23", "q28", "q40", "q41", "q42", "q43", "q55", "q63"];
 
     function filterInvalidCharacters(field) {
