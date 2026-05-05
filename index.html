@@ -1749,7 +1749,7 @@
     </form>
 
     <div class="footer-note">
-      Standalone custom HTML version. Responses are saved in this browser and can be exported as CSV.
+      Responses are submitted securely for Socio-Economic Survey 2026.
     </div>
   </main>
 
@@ -2337,7 +2337,22 @@
         validateOptionalFamilyMembers();
       }
     });
+    function manageSingleChoiceCheckboxSelection(field) {
+  const card = field.closest(".question-card");
+  if (!card || field.type !== "checkbox" || !field.checked) return;
 
+  const singleChoiceQuestionNumbers = [
+    "12", "33", "37", "44", "46", "47", "51", "54", "57", "58", "59", "60"
+  ];
+
+  if (!singleChoiceQuestionNumbers.includes(card.dataset.qno)) return;
+
+  const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
+
+  checkboxes
+    .filter(item => item !== field)
+    .forEach(item => item.checked = false);
+}
     function manageOptionalGenderCheckboxSelection(field) {
       const card = field.closest(".question-card");
       if (!card || !["17", "22", "27"].includes(card.dataset.qno)) return;
@@ -2354,8 +2369,9 @@
       const field = event.target;
       if (!field || !field.id) return;
 
-      manageOptionalGenderCheckboxSelection(field);
-      filterInvalidCharacters(field);
+      manageSingleChoiceCheckboxSelection(field);
+manageOptionalGenderCheckboxSelection(field);
+filterInvalidCharacters(field);
 
       const card = field.closest(".question-card");
       if (!card || card.classList.contains("hidden")) return;
