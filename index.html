@@ -1735,7 +1735,7 @@
           <span class="qno">67.</span> Upload survey image <span class="required">*</span>
         </label>
 
-        <div class="note">Note : Take image through your mobile in landscape mode and upload immediately . File size should be less than 2 MB</div>
+        <div class="note">Note : Take image through your mobile in landscape mode and upload immediately . File size should be less than 2MB</div>
         <input id="q67" name="67. Upload survey image" type="file" accept="image/*" required />
         <div class="note">This form will be submitted only when you fill all the required data.</div>
 
@@ -1968,7 +1968,7 @@
           }
 
           if (file.size > 2 * 1024 * 1024) {
-  return "Please upload an image below 2 MB.";
+  return "Please upload an image below 2MB.";
 }
         }
       }
@@ -2337,23 +2337,24 @@
         validateOptionalFamilyMembers();
       }
     });
-    function manageSingleChoiceCheckboxSelection(field) {
-  const card = field.closest(".question-card");
-  if (!card || field.type !== "checkbox" || !field.checked) return;
+        function manageSingleChoiceCheckboxSelection(field) {
+      const card = field.closest(".question-card");
+      if (!card || field.type !== "checkbox" || !field.checked) return;
 
-  const singleChoiceQuestionNumbers = [
-    "12", "33", "37", "44", "46", "47", "51", "54", "57", "58", "59", "60"
-  ];
+      const singleChoiceQuestionNumbers = [
+        "12", "17", "22", "27", "33", "37", "44", "46", "47", "51", "54", "57", "58", "59", "60"
+      ];
 
-  if (!singleChoiceQuestionNumbers.includes(card.dataset.qno)) return;
+      if (!singleChoiceQuestionNumbers.includes(card.dataset.qno)) return;
 
-  const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
+      const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
 
-  checkboxes
-    .filter(item => item !== field)
-    .forEach(item => item.checked = false);
-}
-    function manageOptionalGenderCheckboxSelection(field) {
+      checkboxes
+        .filter(item => item !== field)
+        .forEach(item => item.checked = false);
+    }
+
+function manageOptionalGenderCheckboxSelection(field) {
       const card = field.closest(".question-card");
       if (!card || !["17", "22", "27"].includes(card.dataset.qno)) return;
 
@@ -2367,11 +2368,22 @@
 
     form.addEventListener("change", function(event) {
       const field = event.target;
-      if (!field || !field.id) return;
+      if (!field) return;
 
       manageSingleChoiceCheckboxSelection(field);
-manageOptionalGenderCheckboxSelection(field);
-filterInvalidCharacters(field);
+      manageOptionalGenderCheckboxSelection(field);
+
+      // Checkbox inputs in this form do not have id values.
+      // So checkbox selection must be handled before checking field.id.
+      if (!field.id) {
+        const changedCard = field.closest(".question-card");
+        if (changedCard && ["17", "22", "27"].includes(changedCard.dataset.qno)) {
+          validateOptionalFamilyMembers();
+        }
+        return;
+      }
+
+      filterInvalidCharacters(field);
 
       const card = field.closest(".question-card");
       if (!card || card.classList.contains("hidden")) return;
