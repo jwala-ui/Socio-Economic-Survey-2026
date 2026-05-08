@@ -2737,7 +2737,22 @@
         validateOptionalFamilyMembers();
       }
     });
+    function manageSingleChoiceCheckboxSelection(field) {
+  const card = field.closest(".question-card");
+  if (!card || field.type !== "checkbox" || !field.checked) return;
 
+  const singleChoiceQuestionNumbers = [
+    "12", "17", "22", "27", "33", "37", "44", "46", "47", "51", "54", "57", "58", "59", "60"
+  ];
+
+  if (!singleChoiceQuestionNumbers.includes(card.dataset.qno)) return;
+
+  const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
+
+  checkboxes
+    .filter(item => item !== field)
+    .forEach(item => item.checked = false);
+}
     function manageOptionalGenderCheckboxSelection(field) {
       const card = field.closest(".question-card");
       if (!card || !["17", "22", "27"].includes(card.dataset.qno)) return;
@@ -2751,14 +2766,28 @@
     }
 
     form.addEventListener("change", function(event) {
-      const field = event.target;
-      if (!field || !field.id) return;
+  const field = event.target;
+  if (!field) return;
 
-      manageOptionalGenderCheckboxSelection(field);
-      filterInvalidCharacters(field);
+  manageSingleChoiceCheckboxSelection(field);
+  manageOptionalGenderCheckboxSelection(field);
 
-      const card = field.closest(".question-card");
-      if (!card || card.classList.contains("hidden")) return;
+  // Checkbox inputs do not have id values.
+  // So checkbox logic must run before checking field.id.
+  if (!field.id) {
+    const changedCard = field.closest(".question-card");
+
+    if (changedCard && ["17", "22", "27"].includes(changedCard.dataset.qno)) {
+      validateOptionalFamilyMembers();
+    }
+
+    return;
+  }
+
+  filterInvalidCharacters(field);
+
+  const card = field.closest(".question-card");
+  if (!card || card.classList.contains("hidden")) return;
 
       if (field.required && field.type !== "checkbox") {
         const specificError = validateSpecificField(field);
