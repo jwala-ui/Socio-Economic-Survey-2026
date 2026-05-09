@@ -3230,7 +3230,18 @@
     form.addEventListener("change", function(event) {
       const field = event.target;
       if (!field) return;
+    if (field.id === "q67GpsConfirm" && field.checked) {
+  const submitRow = document.querySelector(".submit-row");
 
+  if (submitRow) {
+    setTimeout(() => {
+      submitRow.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 250);
+  }
+}
       handleSingleChoiceCheckbox(field);
 
       if (typeof manageOptionalGenderCheckboxSelection === "function") {
