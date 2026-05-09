@@ -315,7 +315,7 @@
     }
 
     .success-modal {
-      width: min(92vw, 520px);
+      width: min(94vw, 620px);
       background: #ffffff;
       border-radius: 18px;
       padding: 28px 24px;
@@ -385,6 +385,138 @@
       color: white;
     }
 
+
+    .progress-panel {
+      display: none;
+      background: #f8fafd;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin: 16px 0 18px;
+      text-align: left;
+    }
+
+    .progress-panel h3 {
+      margin: 0 0 12px;
+      color: var(--purple-dark);
+      font-size: 17px;
+      text-align: center;
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .progress-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .progress-label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .progress-value {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    .progress-note {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .modal-actions .secondary {
+      background: #ede7f6;
+      color: var(--purple-dark);
+    }
+
+    .survey-list-modal {
+      width: min(96vw, 860px);
+      max-height: 88vh;
+      overflow: auto;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+      border-top: 8px solid var(--purple);
+    }
+
+    .survey-list-modal h2 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .survey-list-summary {
+      margin: 8px 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .survey-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .survey-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 14px;
+    }
+
+    .survey-table th,
+    .survey-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .survey-table th {
+      background: #f3effc;
+      color: var(--purple-dark);
+      font-weight: 700;
+    }
+
+    .survey-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .survey-table a {
+      color: var(--purple);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .survey-table a:hover {
+      text-decoration: underline;
+    }
+
+    .survey-list-empty {
+      padding: 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -431,6 +563,20 @@
 
       .modal-actions button {
         width: 100%;
+      }
+
+      .progress-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .survey-list-modal {
+        width: 96vw;
+        padding: 18px 12px;
+        border-radius: 16px;
+      }
+
+      .survey-list-modal h2 {
+        font-size: 20px;
       }
 
       .submit-row {
@@ -488,11 +634,57 @@
 
     <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
       <div class="success-modal">
-        <div class="success-icon">âœ“</div>
+        <div class="success-icon">✓</div>
         <h2 id="successModalTitle">Survey submitted successfully</h2>
         <p id="successModalMessage">You are successfully completed socioeconomic survey.</p>
+
+        <div class="progress-panel" id="progressPanel">
+          <h3>Progress Report</h3>
+          <div class="progress-grid">
+            <div class="progress-item">
+              <span class="progress-label">Survey Report No</span>
+              <span class="progress-value" id="progressReportNo">...</span>
+            </div>
+            <div class="progress-item">
+              <span class="progress-label">Completed</span>
+              <span class="progress-value" id="progressCompleted">...</span>
+            </div>
+            <div class="progress-item">
+              <span class="progress-label">Pending</span>
+              <span class="progress-value" id="progressPending">...</span>
+            </div>
+          </div>
+          <p class="progress-note" id="progressNote">Checking your submitted survey progress...</p>
+        </div>
+
         <div class="modal-actions">
           <button type="button" class="primary" onclick="startAnotherSurvey()">Do another survey</button>
+          <button type="button" class="secondary" onclick="openSurveyListFromLastSubmission()">Check my surveys</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="surveyListModal" role="dialog" aria-modal="true" aria-labelledby="surveyListTitle">
+      <div class="survey-list-modal">
+        <h2 id="surveyListTitle">My Submitted Surveys</h2>
+        <div class="survey-list-summary" id="surveyListSummary">Loading your survey list...</div>
+        <div class="survey-table-wrap" id="surveyTableWrap">
+          <table class="survey-table">
+            <thead>
+              <tr>
+                <th>Report No</th>
+                <th>Family Surveyed</th>
+                <th>Village</th>
+                <th>House No</th>
+                <th>Submitted On</th>
+                <th>PDF Report</th>
+              </tr>
+            </thead>
+            <tbody id="surveyListBody"></tbody>
+          </table>
+        </div>
+        <div class="modal-actions" style="margin-top: 16px;">
+          <button type="button" class="secondary" onclick="closeSurveyList()">Close</button>
         </div>
       </div>
     </div>
@@ -641,7 +833,7 @@
         <div class="question-title">
           <span class="qno">12.</span> Gender <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="12. Gender" value="Male" />
@@ -1100,7 +1292,7 @@
         <div class="question-title">
           <span class="qno">33.</span> Religion <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Mark only one oval.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="33. Religion" value="Hindu" />
@@ -1183,7 +1375,7 @@
         <div class="question-title">
           <span class="qno">37.</span> Availability of agricultural land <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="37. Availability of agricultural land" value="Yes" />
@@ -1292,7 +1484,7 @@
         <div class="question-title">
           <span class="qno">44.</span> Do you have own toilet <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="44. Do you have own toilet" value="Yes" />
@@ -1342,7 +1534,7 @@
         <div class="question-title">
           <span class="qno">46.</span> Is any family member part of Dwacra Group <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="46. Is any family member part of Dwacra Group" value="Yes" />
@@ -1361,7 +1553,7 @@
         <div class="question-title">
           <span class="qno">47.</span> Do you have ration card <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="47. Do you have ration card" value="Yes" />
@@ -1439,7 +1631,7 @@
         <div class="question-title">
           <span class="qno">51.</span> Do you have Government Arogyasri Card <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="51. Do you have Government Arogyasri Card" value="Yes" />
@@ -1459,7 +1651,7 @@
           <span class="qno">52.</span> Any physical handicapped persons in family <span class="required">*</span>
         </label>
 
-        <div class="note">If yes enter the Physical handicapped details</div>
+        <div class="note">No - Skip to question 57</div>
         <select id="q52" name="52. Any physical handicapped persons in family" required>
           <option value="">Choose</option>
           <option value="Yes">Yes</option>
@@ -1537,7 +1729,7 @@
         <div class="question-title">
           <span class="qno">57.</span> Do you have TV <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="57. Do you have TV" value="Yes" />
@@ -1556,7 +1748,7 @@
         <div class="question-title">
           <span class="qno">58.</span> Do you have Dish Connection <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="58. Do you have Dish Connection" value="Yes" />
@@ -1575,7 +1767,7 @@
         <div class="question-title">
           <span class="qno">59.</span> Do you have Laptop <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="59. Do you have Laptop" value="Yes" />
@@ -1594,7 +1786,7 @@
         <div class="question-title">
           <span class="qno">60.</span> Is internet available at home <span class="required">*</span>
         </div>
-        <div class="note">Select one option.</div>
+        <div class="note">Tick all that apply.</div>
         <div class="choice-grid">
           <label class="choice">
             <input type="checkbox" name="60. Is internet available at home" value="Yes" />
@@ -1735,9 +1927,9 @@
           <span class="qno">67.</span> Upload survey image <span class="required">*</span>
         </label>
 
-        <div class="note">Note : Take image through your mobile in landscape mode and upload immediately . File size should be less than 2MB</div>
+        <div class="note">Note : Take image through your mobile in landscape mode and upload immediately . File size should be less than 2 MB</div>
         <input id="q67" name="67. Upload survey image" type="file" accept="image/*" required />
-        <div class="note">This form will be submitted only when you fill all the required data.</div>
+        <div class="note">Once the form is submitted successfully, the survey report will be sent to your registered email ID.</div>
 
       </div>
 
@@ -1749,7 +1941,7 @@
     </form>
 
     <div class="footer-note">
-      Responses are submitted securely for Socio-Economic Survey 2026.
+      standalone HTML version-Copyright © 2026 GDC, Cheepurupalli-Designed and Developed by IQAC, GDC Cheepurupalli.
     </div>
   </main>
 
@@ -1765,7 +1957,19 @@
     const successBox = document.getElementById("successBox");
     const successModal = document.getElementById("successModal");
     const successModalMessage = document.getElementById("successModalMessage");
+    const progressPanel = document.getElementById("progressPanel");
+    const progressReportNo = document.getElementById("progressReportNo");
+    const progressCompleted = document.getElementById("progressCompleted");
+    const progressPending = document.getElementById("progressPending");
+    const progressNote = document.getElementById("progressNote");
+    const surveyListModal = document.getElementById("surveyListModal");
+    const surveyListSummary = document.getElementById("surveyListSummary");
+    const surveyListBody = document.getElementById("surveyListBody");
+    const surveyTableWrap = document.getElementById("surveyTableWrap");
     const recordCount = document.getElementById("recordCount");
+
+    let lastSubmittedRegistrationNo = "";
+    let lastSubmittedEmail = "";
 
     let keepSuccessMessageAfterReset = false;
 
@@ -1817,12 +2021,71 @@
 
         if (!show) {
           card.classList.remove("invalid-card");
+          const messageBox = card.querySelector(".field-error-message");
+          if (messageBox) messageBox.textContent = "";
         }
       });
     }
 
     phSelect.addEventListener("change", setHandicappedVisibility);
     setHandicappedVisibility();
+
+    const singleChoiceCheckboxQuestionNumbers = [
+      "12", "17", "22", "27", "33", "37", "44", "46", "47", "51", "54", "57", "58", "59", "60"
+    ];
+
+    function handleSingleChoiceCheckbox(field) {
+      if (!field || field.type !== "checkbox") return;
+
+      const card = field.closest(".question-card");
+      if (!card) return;
+
+      const qno = card.dataset.qno;
+      if (!singleChoiceCheckboxQuestionNumbers.includes(qno)) return;
+
+      if (field.checked) {
+        const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
+        checkboxes.forEach(box => {
+          if (box !== field) {
+            box.checked = false;
+          }
+        });
+      }
+
+      card.classList.remove("invalid-card");
+
+      const messageBox = card.querySelector(".field-error-message");
+      if (messageBox) {
+        messageBox.textContent = "";
+      }
+    }
+
+    function validateSingleChoiceCheckboxes() {
+      let valid = true;
+
+      singleChoiceCheckboxQuestionNumbers.forEach(qno => {
+        const card = document.querySelector('[data-qno="' + qno + '"]');
+        if (!card || card.classList.contains("hidden")) return;
+
+        const checkedBoxes = card.querySelectorAll('input[type="checkbox"]:checked');
+
+        if (checkedBoxes.length > 1) {
+          valid = false;
+          card.classList.add("invalid-card");
+
+          let messageBox = card.querySelector(".field-error-message");
+          if (!messageBox) {
+            messageBox = document.createElement("div");
+            messageBox.className = "field-error-message";
+            card.appendChild(messageBox);
+          }
+
+          messageBox.textContent = "Please select only one option.";
+        }
+      });
+
+      return valid;
+    }
 
     function validateRequiredCheckboxGroups() {
       let valid = true;
@@ -1967,9 +2230,9 @@
             return "Please upload an image file only.";
           }
 
-          if (file.size > 2 * 1024 * 1024) {
-  return "Please upload an image below 2MB.";
-}
+          if (file.size > 2*1024 * 1024) {
+            return "Please upload an image below 2 MB.";
+          }
         }
       }
 
@@ -2260,6 +2523,202 @@
         .replaceAll("'", "&#039;");
     }
 
+    function jsonpRequest(params, timeoutMs = 15000) {
+      return new Promise((resolve, reject) => {
+        if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE")) {
+          reject(new Error("Web App URL is not configured."));
+          return;
+        }
+
+        const callbackName = "__sesCallback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+        const searchParams = new URLSearchParams({
+          ...params,
+          callback: callbackName
+        });
+
+        const script = document.createElement("script");
+        const separator = WEB_APP_URL.includes("?") ? "&" : "?";
+        script.src = WEB_APP_URL + separator + searchParams.toString();
+
+        const timer = setTimeout(() => {
+          cleanup();
+          reject(new Error("Progress lookup timed out."));
+        }, timeoutMs);
+
+        function cleanup() {
+          clearTimeout(timer);
+          if (script.parentNode) script.parentNode.removeChild(script);
+          try {
+            delete window[callbackName];
+          } catch (error) {
+            window[callbackName] = undefined;
+          }
+        }
+
+        window[callbackName] = function(response) {
+          cleanup();
+          resolve(response || {});
+        };
+
+        script.onerror = function() {
+          cleanup();
+          reject(new Error("Unable to load progress data."));
+        };
+
+        document.body.appendChild(script);
+      });
+    }
+
+    function showProgressLoading() {
+      if (!progressPanel) return;
+
+      progressPanel.style.display = "block";
+      progressReportNo.textContent = "...";
+      progressCompleted.textContent = "...";
+      progressPending.textContent = "...";
+      progressNote.textContent = "Checking your submitted survey progress...";
+    }
+
+    function updateProgressUI(progressData) {
+      if (!progressPanel) return;
+
+      const completed = Number(progressData.completed || 0);
+      const pending = Math.max(50 - completed, 0);
+      const latestReportNo = progressData.latestReportNo || progressData.surveyReportNo || completed || "-";
+
+      progressPanel.style.display = "block";
+      progressReportNo.textContent = latestReportNo;
+      progressCompleted.textContent = completed + " / 50";
+      progressPending.textContent = pending;
+
+      progressNote.textContent = completed >= 50
+        ? "You have completed all 50 survey reports."
+        : "You still need to complete " + pending + " more survey report(s).";
+    }
+
+    function showProgressUnavailable(message) {
+      if (!progressPanel) return;
+
+      progressPanel.style.display = "block";
+      progressReportNo.textContent = "-";
+      progressCompleted.textContent = "-";
+      progressPending.textContent = "-";
+      progressNote.textContent = message || "Progress report is not available right now. Please try again later.";
+    }
+
+    async function refreshStudentProgress(registrationNo, emailId) {
+      try {
+        const response = await jsonpRequest({
+          action: "studentProgress",
+          registrationNo: registrationNo,
+          emailId: emailId
+        });
+
+        if (response.status !== "success") {
+          showProgressUnavailable(response.message || "Progress report is not available right now.");
+          return null;
+        }
+
+        updateProgressUI(response);
+        return response;
+      } catch (error) {
+        showProgressUnavailable("Progress report needs the Apps Script lookup endpoint. Submission is still saved.");
+        return null;
+      }
+    }
+
+    function renderSurveyList(data) {
+      const surveys = Array.isArray(data.surveys) ? data.surveys : [];
+      const completed = Number(data.completed || surveys.length || 0);
+      const pending = Math.max(50 - completed, 0);
+
+      surveyListSummary.textContent =
+        "Completed: " + completed + " / 50 | Pending: " + pending;
+
+      surveyListBody.innerHTML = "";
+
+      if (surveys.length === 0) {
+        surveyTableWrap.innerHTML = '<div class="survey-list-empty">No submitted surveys found for this Registration No and Email ID.</div>';
+        return;
+      }
+
+      surveys.forEach(item => {
+        const tr = document.createElement("tr");
+
+        const reportUrl = item.reportUrl || item.pdfUrl || "";
+        const reportLink = reportUrl
+          ? '<a href="' + escapeHTML(reportUrl) + '" target="_blank" rel="noopener noreferrer">View PDF</a>'
+          : "-";
+
+        tr.innerHTML =
+          "<td>" + escapeHTML(item.reportNo || item.surveyReportNo || "") + "</td>" +
+          "<td>" + escapeHTML(item.familyName || item.person1Name || "") + "</td>" +
+          "<td>" + escapeHTML(item.village || item.habitat || "") + "</td>" +
+          "<td>" + escapeHTML(item.houseNo || "") + "</td>" +
+          "<td>" + escapeHTML(item.timestamp || "") + "</td>" +
+          "<td>" + reportLink + "</td>";
+
+        surveyListBody.appendChild(tr);
+      });
+    }
+
+    async function openSurveyListFromLastSubmission() {
+      let registrationNo = lastSubmittedRegistrationNo;
+      let emailId = lastSubmittedEmail;
+
+      if (!registrationNo) {
+        registrationNo = prompt("Enter your 12 digit Registration No") || "";
+      }
+
+      if (!emailId) {
+        emailId = prompt("Enter your email ID") || "";
+      }
+
+      registrationNo = registrationNo.trim();
+      emailId = emailId.trim();
+
+      if (!registrationNo || !emailId) {
+        alert("Registration No and Email ID are required to check submitted surveys.");
+        return;
+      }
+
+      if (surveyListModal) {
+        surveyListModal.classList.add("show");
+      }
+
+      if (surveyTableWrap && !surveyTableWrap.querySelector("table")) {
+        surveyTableWrap.innerHTML =
+          '<table class="survey-table"><thead><tr><th>Report No</th><th>Family Surveyed</th><th>Village</th><th>House No</th><th>Submitted On</th><th>PDF Report</th></tr></thead><tbody id="surveyListBody"></tbody></table>';
+      }
+
+      surveyListSummary.textContent = "Loading your submitted surveys...";
+      const currentBody = document.getElementById("surveyListBody");
+      if (currentBody) currentBody.innerHTML = "";
+
+      try {
+        const response = await jsonpRequest({
+          action: "studentProgress",
+          registrationNo: registrationNo,
+          emailId: emailId
+        });
+
+        if (response.status !== "success") {
+          surveyListSummary.textContent = response.message || "Unable to fetch submitted surveys right now.";
+          return;
+        }
+
+        renderSurveyList(response);
+      } catch (error) {
+        surveyListSummary.textContent = "Survey list needs the Apps Script lookup endpoint. Please update Code.gs.";
+      }
+    }
+
+    function closeSurveyList() {
+      if (surveyListModal) {
+        surveyListModal.classList.remove("show");
+      }
+    }
+
     function startAnotherSurvey() {
       successBox.style.display = "none";
 
@@ -2337,7 +2796,8 @@
         validateOptionalFamilyMembers();
       }
     });
-        function manageSingleChoiceCheckboxSelection(field) {
+
+    function manageSingleChoiceCheckboxSelection(field) {
       const card = field.closest(".question-card");
       if (!card || field.type !== "checkbox" || !field.checked) return;
 
@@ -2348,13 +2808,10 @@
       if (!singleChoiceQuestionNumbers.includes(card.dataset.qno)) return;
 
       const checkboxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
-
-      checkboxes
-        .filter(item => item !== field)
-        .forEach(item => item.checked = false);
+      checkboxes.filter(item => item !== field).forEach(item => item.checked = false);
     }
 
-function manageOptionalGenderCheckboxSelection(field) {
+    function manageOptionalGenderCheckboxSelection(field) {
       const card = field.closest(".question-card");
       if (!card || !["17", "22", "27"].includes(card.dataset.qno)) return;
 
@@ -2370,16 +2827,19 @@ function manageOptionalGenderCheckboxSelection(field) {
       const field = event.target;
       if (!field) return;
 
-      manageSingleChoiceCheckboxSelection(field);
-      manageOptionalGenderCheckboxSelection(field);
+      handleSingleChoiceCheckbox(field);
 
-      // Checkbox inputs in this form do not have id values.
-      // So checkbox selection must be handled before checking field.id.
+      if (typeof manageOptionalGenderCheckboxSelection === "function") {
+        manageOptionalGenderCheckboxSelection(field);
+      }
+
       if (!field.id) {
         const changedCard = field.closest(".question-card");
+
         if (changedCard && ["17", "22", "27"].includes(changedCard.dataset.qno)) {
           validateOptionalFamilyMembers();
         }
+
         return;
       }
 
@@ -2416,10 +2876,11 @@ function manageOptionalGenderCheckboxSelection(field) {
 
       const validStandard = validateRequiredStandardFields();
       const validCheckboxes = validateRequiredCheckboxGroups();
+      const validSingleChoiceCheckboxes = validateSingleChoiceCheckboxes();
       const validProblemDropdowns = validateProblemDropdowns();
       const validOptionalFamilyMembers = validateOptionalFamilyMembers();
 
-      if (!validStandard || !validCheckboxes || !validProblemDropdowns || !validOptionalFamilyMembers) {
+      if (!validStandard || !validCheckboxes || !validSingleChoiceCheckboxes || !validProblemDropdowns || !validOptionalFamilyMembers) {
         const firstInvalid = document.querySelector(".invalid-card");
         if (firstInvalid) firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
@@ -2445,16 +2906,25 @@ function manageOptionalGenderCheckboxSelection(field) {
         const personOneName = submissionPackage.data["11. Name of the Person 1"] || "this";
         const safePersonOneName = escapeHTML(personOneName);
 
+        lastSubmittedRegistrationNo = submissionPackage.data["3. Registration No"] || "";
+        lastSubmittedEmail = submissionPackage.data["4. email id"] || "";
+
         if (successModalMessage) {
           successModalMessage.innerHTML =
-            "You are successfully completed socioeconomic survey of <strong>" +
+            "You have successfully completed socioeconomic survey of <strong>" +
             safePersonOneName +
             "</strong> family.";
         }
 
+        showProgressLoading();
+
         if (successModal) {
           successModal.classList.add("show");
         }
+
+        setTimeout(() => {
+          refreshStudentProgress(lastSubmittedRegistrationNo, lastSubmittedEmail);
+        }, 2500);
 
         successBox.style.display = "none";
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -2530,6 +3000,11 @@ function manageOptionalGenderCheckboxSelection(field) {
     }
 
     document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && surveyListModal && surveyListModal.classList.contains("show")) {
+        closeSurveyList();
+        return;
+      }
+
       if (event.key === "Escape" && successModal && successModal.classList.contains("show")) {
         startAnotherSurvey();
       }
