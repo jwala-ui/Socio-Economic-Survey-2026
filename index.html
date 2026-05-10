@@ -3109,7 +3109,69 @@
         surveyListBody.appendChild(tr);
       });
     }
+async function printFinalSurveyReportManual() {
+  let registrationNo = prompt("Enter your 12 digit Registration No");
 
+  if (!registrationNo) {
+    return;
+  }
+
+  registrationNo = registrationNo.trim();
+
+  if (!/^\d{12}$/.test(registrationNo)) {
+    alert("Please enter a valid 12 digit Registration No.");
+    return;
+  }
+
+  let emailId = prompt("Enter your registered Email ID");
+
+  if (!emailId) {
+    return;
+  }
+
+  emailId = emailId.trim().toLowerCase();
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailId)) {
+    alert("Please enter a valid Email ID.");
+    return;
+  }
+
+  const printButton = document.querySelector(".print-report-top-button");
+  const originalText = printButton ? printButton.textContent : "Print Survey Report";
+
+  if (printButton) {
+    printButton.disabled = true;
+    printButton.textContent = "Generating...";
+  }
+
+  try {
+    const response = await jsonpRequest({
+      action: "studentFinalReport",
+      registrationNo: registrationNo,
+      emailId: emailId
+    }, 60000);
+
+    if (response.status !== "success") {
+      alert(response.message || "Final survey report can be generated only after completing 50 surveys.");
+      return;
+    }
+
+    if (response.pdfUrl) {
+      window.open(response.pdfUrl, "_blank");
+    } else {
+      alert("Final report generated, but PDF link was not received.");
+    }
+
+  } catch (error) {
+    alert("Unable to generate final survey report right now. Please try again.");
+    console.log(error);
+  } finally {
+    if (printButton) {
+      printButton.disabled = false;
+      printButton.textContent = originalText;
+    }
+  }
+}
     async function openSurveyListFromLastSubmission() {
       let registrationNo = lastSubmittedRegistrationNo;
       let emailId = lastSubmittedEmail;
