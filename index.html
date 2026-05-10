@@ -903,10 +903,16 @@
 <body>
   <main class="page">
     <header class="form-header">
-      <h1>Socio-Economic Survey 2026 -GDC Cheepurupalli</h1>
-      <p>Dear student go to a household in your village and fill the details of the family in this webform.</p>
-      <div class="required-note">* Indicates required question</div>
-    </header>
+  <div class="header-top-row">
+    <h1>Socio-Economic Survey 2026 -GDC Cheepurupalli</h1>
+    <button type="button" class="print-report-top-button" onclick="printFinalSurveyReportManual()">
+      Print Survey Report
+    </button>
+  </div>
+
+  <p>Dear student go to a household in your village and fill the details of the family in this webform.</p>
+  <div class="required-note">* Indicates required question</div>
+</header>
 
     <div class="toolbar hidden">
       <button type="button" class="secondary" onclick="downloadCSV()">Download CSV</button>
