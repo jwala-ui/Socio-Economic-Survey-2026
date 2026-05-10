@@ -924,19 +924,7 @@
   background: #0842a0;
 }
 
-@media (max-width: 640px) {
-  .header-top-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .print-report-top-button {
-    width: 100%;
-    margin-top: 8px;
-    padding: 12px 14px;
-  }
-}
-    .print-report-box {
+.print-report-box {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -952,9 +940,28 @@
 }
 
 @media (max-width: 640px) {
+  .header-top-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .header-top-row h1 {
+    margin-bottom: 4px;
+    line-height: 1.25;
+  }
+
   .print-report-box {
     align-items: stretch;
     width: 100%;
+    margin-top: 0;
+    gap: 6px;
+  }
+
+  .print-report-top-button {
+    width: 100%;
+    margin-top: 0;
+    padding: 12px 14px;
   }
 
   .print-report-note {
