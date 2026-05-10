@@ -901,11 +901,20 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
 }
 
 .header-top-row h1 {
   flex: 1;
+  margin-bottom: 0;
+}
+
+.print-report-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  margin-top: 4px;
 }
 
 .print-report-top-button {
@@ -924,50 +933,48 @@
   background: #0842a0;
 }
 
-.print-report-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
-
 .print-report-note {
   font-size: 12px;
   color: #5f6368;
-  max-width: 220px;
+  max-width: 230px;
   text-align: right;
   line-height: 1.35;
 }
 
 @media (max-width: 640px) {
+  .form-header {
+    padding-top: 20px;
+  }
+
   .header-top-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
+    gap: 4px;
   }
 
   .header-top-row h1 {
-    margin-bottom: 4px;
-    line-height: 1.25;
+    margin-bottom: 0;
+    line-height: 1.22;
   }
 
   .print-report-box {
     align-items: stretch;
     width: 100%;
-    margin-top: 0;
-    gap: 6px;
+    margin-top: 2px;
+    gap: 5px;
   }
 
   .print-report-top-button {
     width: 100%;
     margin-top: 0;
-    padding: 12px 14px;
+    padding: 11px 14px;
   }
 
   .print-report-note {
     max-width: 100%;
     text-align: center;
     font-size: 12px;
+    margin-top: 0;
   }
 }
   </style>
