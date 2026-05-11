@@ -3194,7 +3194,7 @@ async function printFinalSurveyReportManual() {
       action: "studentFinalReport",
       registrationNo: registrationNo,
       emailId: emailId
-    }, 60000);
+    }, 180000);
 
     if (response.status !== "success") {
       alert(response.message || "Final survey report can be generated only after completing 50 surveys.");
@@ -3208,9 +3208,9 @@ async function printFinalSurveyReportManual() {
     }
 
   } catch (error) {
-    alert("Unable to generate final survey report right now. Please try again.");
-    console.log(error);
-  } finally {
+  alert("Unable to generate final survey report right now. Technical reason: " + error.message);
+  console.log(error);
+} finally {
     if (printButton) {
       printButton.disabled = false;
       printButton.textContent = originalText;
